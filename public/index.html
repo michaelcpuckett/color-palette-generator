@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CSS Color Palette Generator</title>
+    <style>
+      :root {
+        --swatch--display-p3__rosest: color(display-p3 1 0.05 0.45);
+        --swatch--display-p3__sour-lime: color(display-p3 0 1 0);
+        --swatch--display-p3__ultra-turquoise: color(display-p3 0 1 0.701);
+        --swatch--display-p3__hot-coral: color(display-p3 0.96 0.34 0.27);
+        --swatch--display-p3__super-red: color(display-p3 1 0 0);
+        --swatch--display-p3__robins-blue: color(display-p3 0.17 0.68 1);
+        --swatch--display-p3__super-blue: color(display-p3 0 0 1);
+        --swatch--display-p3__equinox-green: color(display-p3 0.24 1 0.52);
+        --swatch--display-p3__anouk-rose: color(display-p3 1 0.64 1);
+        --swatch--display-p3__super-green: color(display-p3 0 1 0);
+        --swatch--display-p3__super-yellow: color(display-p3 1 1 0);
+        --swatch--display-p3__super-fuchsia: color(display-p3 1 0 1);
+        --swatch--display-p3__green-1907: color(display-p3 0 0.58 0.3);
+        --swatch--display-p3__lighting-violet: color(display-p3 0.24 0 1);
+        --swatch--display-p3__ultra-cyan: color(display-p3 0 1 1);
+        --swatch--display-p3__radioactive-lime: color(display-p3 0.76 1 0);
+        --swatch--dynamic__analagous-1--hue-offset: 30;
+        --swatch--dynamic__analagous-2--hue-offset: 60;
+        --swatch--dynamic__analagous-3--hue-offset: 90;
+        --swatch--dynamic__analagous-negative-3--hue-offset: 270;
+        --swatch--dynamic__analagous-negative-2--hue-offset: 300;
+        --swatch--dynamic__analagous-negative-1--hue-offset: 330;
+        --swatch--dynamic__tetradic-1--hue-offset: 90;
+        --swatch--dynamic__triadic-1--hue-offset: 120;
+        --swatch--dynamic__split-1--hue-offset: 150;
+        --swatch--dynamic__complementary--hue-offset: 180;
+        --swatch--dynamic__tetradic-2--hue-offset: 180;
+        --swatch--dynamic__split-2--hue-offset: 210;
+        --swatch--dynamic__triadic-2--hue-offset: 240;
+        --swatch--dynamic__tetradic-3--hue-offset: 270;
+
+        --swatch--dynamic__from--basis: hsl(
+          var(--swatch--dynamic--hue) var(--swatch--dynamic--saturation) 50%
+        );
+
+        --swatch--dynamic--from: var(
+          --swatch--dynamic--spot-color,
+          var(--swatch--dynamic__from--basis)
+        );
+      }
+
+      [type~="primary"] {
+        --swatch--dynamic--500: oklch(from var(--swatch--dynamic--from) l c h);
+      }
+
+      [type~="complementary"] {
+        --swatch--dynamic--500: oklch(
+          from var(--swatch--dynamic--from) l c
+            calc(h + var(--swatch--dynamic__complementary--hue-offset))
+        );
+      }
+
+      [type~="split-1"] {
+        --swatch--dynamic--500: oklch(
+          from var(--swatch--dynamic--from) l c
+            calc(h + var(--swatch--dynamic__split-1--hue-offset))
+        );
+      }
+
+      [type~="split-2"] {
+        --swatch--dynamic--500: oklch(
+          from var(--swatch--dynamic--from) l c
+            calc(h + var(--swatch--dynamic__split-2--hue-offset))
+        );
+      }
+
+      [type~="triadic-1"] {
+        --swatch--dynamic--500: oklch(
+          from var(--swatch--dynamic--from) l c
+            calc(h + var(--swatch--dynamic__triadic-1--hue-offset))
+        );
+      }
+
+      [type~="triadic-2"] {
+        --swatch--dynamic--500: oklch(
+          from var(--swatch--dynamic--from) l c
+            calc(h + var(--swatch--dynamic__triadic-2--hue-offset))
+        );
+      }
+
+      [type~="tetradic-1"] {
+        --swatch--dynamic--500: oklch(
+          from var(--swatch--dynamic--from) l c
+            calc(h + var(--swatch--dynamic__tetradic-1--hue-offset))
+        );
+      }
+
+      [type~="tetradic-2"] {
+        --swatch--dynamic--500: oklch(
+          from var(--swatch--dynamic--from) l c
+            calc(h + var(--swatch--dynamic__tetradic-2--hue-offset))
+        );
+      }
+
+      [type~="tetradic-3"] {
+        --swatch--dynamic--500: oklch(
+          from var(--swatch--dynamic--from) l c
+            calc(h + var(--swatch--dynamic__tetradic-3--hue-offset))
+        );
+      }
+
+      [type~="analagous-negative-3"] {
+        --swatch--dynamic--500: oklch(
+          from var(--swatch--dynamic--from) l c
+            calc(h + var(--swatch--dynamic__analagous-negative-3--hue-offset))
+        );
+      }
+
+      [type~="analagous-negative-2"] {
+        --swatch--dynamic--500: oklch(
+          from var(--swatch--dynamic--from) l c
+            calc(h + var(--swatch--dynamic__analagous-negative-2--hue-offset))
+        );
+      }
+
+      [type~="analagous-negative-1"] {
+        --swatch--dynamic--500: oklch(
+          from var(--swatch--dynamic--from) l c
+            calc(h + var(--swatch--dynamic__analagous-negative-1--hue-offset))
+        );
+      }
+
+      [type~="analagous-1"] {
+        --swatch--dynamic--500: oklch(
+          from var(--swatch--dynamic--from) l c
+            calc(h + var(--swatch--dynamic__analagous-1--hue-offset))
+        );
+      }
+
+      [type~="analagous-2"] {
+        --swatch--dynamic--500: oklch(
+          from var(--swatch--dynamic--from) l c
+            calc(h + var(--swatch--dynamic__analagous-2--hue-offset))
+        );
+      }
+
+      [type~="analagous-3"] {
+        --swatch--dynamic--500: oklch(
+          from var(--swatch--dynamic--from) l c
+            calc(h + var(--swatch--dynamic__analagous-3--hue-offset))
+        );
+      }
+
+      swatch-palette {
+        --swatch--dynamic--100: color-mix(
+          in oklab,
+          var(--swatch--dynamic--500),
+          white 80%
+        );
+        --swatch--dynamic--200: color-mix(
+          in oklab,
+          var(--swatch--dynamic--500),
+          white 50%
+        );
+        --swatch--dynamic--300: color-mix(
+          in oklab,
+          var(--swatch--dynamic--500),
+          white 37.5%
+        );
+        --swatch--dynamic--400: color-mix(
+          in oklab,
+          var(--swatch--dynamic--500),
+          white 12.5%
+        );
+        --swatch--dynamic--600: color-mix(
+          in oklab,
+          var(--swatch--dynamic--500),
+          black 12.5%
+        );
+        --swatch--dynamic--700: color-mix(
+          in oklab,
+          var(--swatch--dynamic--500),
+          black 25%
+        );
+        --swatch--dynamic--800: color-mix(
+          in oklab,
+          var(--swatch--dynamic--500),
+          black 37.5%
+        );
+        --swatch--dynamic--900: color-mix(
+          in oklab,
+          var(--swatch--dynamic--500),
+          black 50%
+        );
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://colorjs.io/dist/color.global.legacy.js"></script>
+    <!-- Shadow Root Templates -->
+    <template id="template-for-swatch-palette">
+      <style>
+        * {
+          &,
+          &:before,
+          &:after {
+            box-sizing: border-box;
+          }
+        }
+
+        .header {
+          display: flex;
+          gap: 0.5rem;
+          align-items: center;
+          margin: 0 0 1.25rem;
+        }
+
+        h3 {
+          margin: 0;
+          display: flex;
+          gap: 0.5rem;
+          align-items: center;
+          font-weight: normal;
+
+          &:after {
+            content: "-";
+          }
+        }
+
+        p {
+          display: flex;
+          align-items: center;
+          margin: 0;
+          gap: 1ch;
+        }
+
+        hr {
+          margin: 20px 0;
+          border: 0;
+          display: flex;
+          height: 1px;
+          background: #ccc;
+        }
+
+        .swatches {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          justify-content: space-between;
+          column-gap: 12px;
+          row-gap: 0.5em;
+
+          @media (min-width: 800px) {
+            flex-direction: row;
+          }
+        }
+
+        .swatch {
+          min-height: 48px;
+          width: 100%;
+          display: grid;
+          position: relative;
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto;
+          place-items: center;
+          place-content: center;
+          gap: 1ch;
+        }
+
+        .swatch:before {
+          grid-row: 1 / 2;
+          grid-column: 1 / 2;
+          content: "";
+          width: 100%;
+          flex: 0 1 100%;
+          background-color: var(--swatch);
+          display: flex;
+          border: 4px solid white;
+          outline: 1px solid #ccc;
+          aspect-ratio: 3 / 1;
+        }
+
+        @media (min-width: 800px) {
+          .swatch:before {
+            aspect-ratio: 1 / 1;
+          }
+        }
+
+        .swatch small {
+          grid-row: 1 / 2;
+          grid-column: 1 / 2;
+          content: var(--name);
+          text-transform: uppercase;
+          font-size: 0.95rem;
+          background: Canvas;
+          color: CanvasText;
+          padding: 4px;
+
+          &:after {
+            content: var(--name);
+          }
+        }
+
+        .swatch span {
+          grid-row: 2 / 3;
+          grid-column: 1 / 2;
+          text-align: center;
+          margin: 0;
+          font-size: 0.875em;
+        }
+      </style>
+      <div class="header">
+        <h3 hidden></h3>
+        <p hidden><span class="angle"></span> degrees</p>
+      </div>
+      <div class="swatches">
+        <div
+          class="swatch"
+          style="--swatch: var(--swatch--named__white); --name: 'White'"
+        >
+          <small></small>
+        </div>
+        <div
+          class="swatch"
+          style="--swatch: var(--swatch--dynamic--100); --name: '100'"
+        >
+          <small></small>
+        </div>
+        <div
+          class="swatch"
+          style="--swatch: var(--swatch--dynamic--200); --name: '200'"
+        >
+          <small></small>
+        </div>
+        <div
+          class="swatch"
+          style="--swatch: var(--swatch--dynamic--300); --name: '300'"
+        >
+          <small></small>
+        </div>
+        <div
+          class="swatch"
+          style="--swatch: var(--swatch--dynamic--400); --name: '400'"
+        >
+          <small></small>
+        </div>
+        <div
+          class="swatch"
+          style="--swatch: var(--swatch--dynamic--500); --name: '500'"
+        >
+          <small></small>
+        </div>
+        <div
+          class="swatch"
+          style="--swatch: var(--swatch--dynamic--600); --name: '600'"
+        >
+          <small></small>
+        </div>
+        <div
+          class="swatch"
+          style="--swatch: var(--swatch--dynamic--700); --name: '700'"
+        >
+          <small></small>
+        </div>
+        <div
+          class="swatch"
+          style="--swatch: var(--swatch--dynamic--800); --name: '800'"
+        >
+          <small></small>
+        </div>
+        <div
+          class="swatch"
+          style="--swatch: var(--swatch--dynamic--900); --name: '900'"
+        >
+          <small></small>
+        </div>
+        <div
+          class="swatch"
+          style="--swatch: var(--swatch--named__black); --name: 'Black'"
+        >
+          <small></small>
+        </div>
+      </div>
+      <hr />
+    </template>
+    <template id="template-for-example-cards">
+      <style>
+        * {
+          &,
+          &:before,
+          &:after {
+            box-sizing: border-box;
+          }
+        }
+
+        :host {
+          display: grid;
+          row-gap: 1rem;
+        }
+
+        :host([type~="primary"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c h
+          );
+        }
+
+        :host([type~="complementary"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c
+              calc(h + var(--swatch--dynamic__complementary--hue-offset))
+          );
+        }
+
+        :host([type~="split-1"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c
+              calc(h + var(--swatch--dynamic__split-1--hue-offset))
+          );
+        }
+
+        :host([type~="split-2"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c
+              calc(h + var(--swatch--dynamic__split-2--hue-offset))
+          );
+        }
+
+        :host([type~="triadic-1"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c
+              calc(h + var(--swatch--dynamic__triadic-1--hue-offset))
+          );
+        }
+
+        :host([type~="triadic-2"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c
+              calc(h + var(--swatch--dynamic__triadic-2--hue-offset))
+          );
+        }
+
+        :host([type~="tetradic-1"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c
+              calc(h + var(--swatch--dynamic__tetradic-1--hue-offset))
+          );
+        }
+
+        :host([type~="tetradic-2"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c
+              calc(h + var(--swatch--dynamic__tetradic-2--hue-offset))
+          );
+        }
+
+        :host([type~="tetradic-3"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c
+              calc(h + var(--swatch--dynamic__tetradic-3--hue-offset))
+          );
+        }
+
+        :host([type~="analagous-negative-3"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c
+              calc(h + var(--swatch--dynamic__analagous-negative-1--hue-offset))
+          );
+        }
+
+        :host([type~="analagous-negative-2"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c
+              calc(h + var(--swatch--dynamic__analagous-negative-1--hue-offset))
+          );
+        }
+
+        :host([type~="analagous-negative-1"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c
+              calc(h + var(--swatch--dynamic__analagous-negative-1--hue-offset))
+          );
+        }
+
+        :host([type~="analagous-negative-3"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c
+              calc(h + var(--swatch--dynamic__analagous-negative-3--hue-offset))
+          );
+        }
+
+        :host([type~="analagous-negative-2"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c
+              calc(h + var(--swatch--dynamic__analagous-negative-2--hue-offset))
+          );
+        }
+
+        :host([type~="analagous-negative-1"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c
+              calc(h + var(--swatch--dynamic__analagous-negative-1--hue-offset))
+          );
+        }
+
+        :host([type~="analagous-1"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c
+              calc(h + var(--swatch--dynamic__analagous-1--hue-offset))
+          );
+        }
+
+        :host([type~="analagous-2"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c
+              calc(h + var(--swatch--dynamic__analagous-2--hue-offset))
+          );
+        }
+
+        :host([type~="analagous-3"]) {
+          --swatch--dynamic--500: oklch(
+            from var(--swatch--dynamic--from) l c
+              calc(h + var(--swatch--dynamic__analagous-3--hue-offset))
+          );
+        }
+
+        :host([hidden]) {
+          display: none;
+        }
+
+        h3 {
+          font-size: 1.5rem;
+          margin: 0;
+        }
+
+        .cards {
+          --swatch--dynamic--100: color-mix(
+            in oklab,
+            var(--swatch--dynamic--500),
+            white 80%
+          );
+          --swatch--dynamic--200: color-mix(
+            in oklab,
+            var(--swatch--dynamic--500),
+            white 50%
+          );
+          --swatch--dynamic--300: color-mix(
+            in oklab,
+            var(--swatch--dynamic--500),
+            white 37.5%
+          );
+          --swatch--dynamic--400: color-mix(
+            in oklab,
+            var(--swatch--dynamic--500),
+            white 12.5%
+          );
+          --swatch--dynamic--600: color-mix(
+            in oklab,
+            var(--swatch--dynamic--500),
+            black 12.5%
+          );
+          --swatch--dynamic--700: color-mix(
+            in oklab,
+            var(--swatch--dynamic--500),
+            black 25%
+          );
+          --swatch--dynamic--800: color-mix(
+            in oklab,
+            var(--swatch--dynamic--500),
+            black 37.5%
+          );
+          --swatch--dynamic--900: color-mix(
+            in oklab,
+            var(--swatch--dynamic--500),
+            black 50%
+          );
+
+          display: grid;
+          gap: 1rem;
+
+          @media (min-width: 800px) {
+            grid-auto-flow: column;
+            grid-template-rows: auto minmax(0px, 1fr) auto;
+          }
+        }
+
+        .card {
+          flex: 1 0 auto;
+          gap: 0;
+          font-family: APCA-Approved-Font-Family, sans-serif;
+          background-color: var(--swatch--dynamic--100);
+          padding: 20px;
+          border-radius: 4px;
+          border: 1px solid var(--swatch--dynamic--300);
+          display: grid;
+          grid-row: auto / span 3;
+          grid-template-rows: subgrid;
+          transition-duration: 60ms;
+          transition-timing-function: ease-in-out;
+          transition-property: width;
+
+          @media (max-width: 799px) {
+            &:not(:first-of-type) {
+              display: none;
+            }
+          }
+
+          & h3 {
+            color: var(--swatch--dynamic--800);
+            margin: 0;
+            font-size: 2rem;
+          }
+
+          & .card-content {
+            color: black;
+            font: inherit;
+          }
+
+          & button {
+            background-color: var(--swatch--dynamic--800);
+            border: 1px solid var(--swatch--dynamic--900);
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 8px 16px;
+            font: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+
+            color: var(--text-color, white);
+
+            &:hover {
+              background-color: var(--swatch--dynamic--900);
+            }
+          }
+        }
+
+        hr {
+          margin: 20px 0;
+          border: 0;
+          display: flex;
+          height: 1px;
+          background: #ccc;
+        }
+      </style>
+      <h3 hidden></h3>
+      <div class="cards">
+        <div class="card">
+          <h3>Example</h3>
+          <div class="card-content">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+              nec fermentum nunc. Nullam nec fermentum nunc. Nullam nec
+              fermentum nunc.
+            </p>
+            <ul>
+              <li>heading: swatch--800 / swatch--100</li>
+              <li>content: black / swatch--100</li>
+              <li>button: white / swatch--700</li>
+            </ul>
+          </div>
+          <button type="button">Learn More &longrightarrow;</button>
+        </div>
+        <div class="card">
+          <h3>Example</h3>
+          <div class="card-content">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+              nec fermentum nunc. Nullam nec fermentum nunc. Nullam nec
+              fermentum nunc.
+            </p>
+            <ul>
+              <li>heading: swatch--800 / swatch--100</li>
+              <li>content: black / swatch--100</li>
+              <li>button: white / swatch--700</li>
+            </ul>
+          </div>
+          <button type="button">Learn More &longrightarrow;</button>
+        </div>
+        <div class="card">
+          <h3>Example</h3>
+          <div class="card-content">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+              nec fermentum nunc. Nullam nec fermentum nunc. Nullam nec
+              fermentum nunc.
+            </p>
+            <ul>
+              <li>heading: swatch--800 / swatch--100</li>
+              <li>content: black / swatch--100</li>
+              <li>button: white / swatch--700</li>
+            </ul>
+          </div>
+          <button type="button">Learn More &longrightarrow;</button>
+        </div>
+      </div>
+      <hr />
+    </template>
+    <!-- Global Event Handlers and Custom Element Definitions -->
+    <script type="module">
+      window.document.documentElement.addEventListener(
+        "color-picker-form-styling-change",
+        (event) => {
+          const documentElement = event.currentTarget;
+          const { spotColor, hue, saturation } = event.detail;
+
+          if (spotColor) {
+            documentElement.style.setProperty(
+              "--swatch--dynamic--spot-color",
+              spotColor
+            );
+          } else {
+            documentElement.style.removeProperty(
+              "--swatch--dynamic--spot-color"
+            );
+          }
+
+          if (hue) {
+            documentElement.style.setProperty("--swatch--dynamic--hue", hue);
+          }
+
+          if (saturation) {
+            documentElement.style.setProperty(
+              "--swatch--dynamic--saturation",
+              saturation
+            );
+          }
+        }
+      );
+
+      window.customElements.define(
+        "swatch-palette",
+        class SwatchPalette extends HTMLElement {
+          constructor() {
+            super();
+            this.attachShadow({ mode: "open" });
+            const templateElement = window.document.getElementById(
+              "template-for-swatch-palette"
+            );
+            this.shadowRoot.appendChild(
+              templateElement.content.cloneNode(true)
+            );
+            const headingElement = this.shadowRoot.querySelector("h3[hidden]");
+            const headingText = this.getAttribute("label");
+            headingElement.textContent = headingText;
+            headingElement.removeAttribute("hidden");
+
+            const paragraphElement = this.shadowRoot.querySelector("p[hidden]");
+            const angleElement = this.shadowRoot.querySelector(".angle");
+            const angleText = this.getAttribute("angle");
+            angleElement.textContent = angleText;
+            paragraphElement.removeAttribute("hidden");
+          }
+        }
+      );
+      window.customElements.define(
+        "example-cards",
+        class ExampleCards extends HTMLElement {
+          constructor() {
+            super();
+            this.attachShadow({ mode: "open" });
+            const templateElement = window.document.getElementById(
+              "template-for-example-cards"
+            );
+            this.shadowRoot.appendChild(
+              templateElement.content.cloneNode(true)
+            );
+
+            const headingElement = this.shadowRoot.querySelector("h3[hidden]");
+            const headingText = this.getAttribute("label");
+            headingElement.textContent = headingText;
+            headingElement.removeAttribute("hidden");
+          }
+        }
+      );
+
+      window.customElements.define(
+        "color-picker-form",
+        class ColorPickerForm extends HTMLElement {
+          connectedCallback() {
+            this.swatchPaletteElements = Array.from(
+              window.document.querySelectorAll("swatch-palette")
+            );
+
+            this.hueInputElement = this.querySelector("input[name='hue']");
+
+            this.saturationInputElement = this.querySelector(
+              "input[name='saturation']"
+            );
+
+            const p3SwatchInputElements = Array.from(
+              this.querySelectorAll("input[name='display-p3-color']")
+            );
+
+            p3SwatchInputElements.forEach((inputElement) => {
+              const displayP3ColorName = inputElement.value;
+
+              inputElement.parentElement.style.setProperty(
+                "--swatch",
+                "var(--swatch--display-p3__" + displayP3ColorName + ")"
+              );
+            });
+
+            this.querySelector(
+              "fieldset:has(input[name='display-p3-color']"
+            ).addEventListener("input", (event) => {
+              if (!event.target instanceof HTMLElement) {
+                return;
+              }
+
+              if (!event.target.matches("input[name='display-p3-color']")) {
+                return;
+              }
+
+              const checked = event.target.checked;
+
+              if (!checked) {
+                return;
+              }
+
+              const displayP3ColorName = event.target.value;
+
+              const displayP3ColorValue = window
+                .getComputedStyle(event.target)
+                .getPropertyValue(
+                  `--swatch--display-p3__${displayP3ColorName}`
+                );
+
+              const displayP3Color = new Color(displayP3ColorValue);
+              const { s: saturation, h: hue } = displayP3Color.to("oklch").hsl;
+
+              const normalizedHue = Math.round(Math.max(Math.min(hue, 360), 0));
+
+              const normalizedSaturation = Math.round(
+                Math.max(Math.min(saturation * 100, 100), 0)
+              );
+
+              this.dispatchEvent(
+                new CustomEvent("color-picker-form-styling-change", {
+                  detail: {
+                    spotColor: displayP3ColorValue,
+                    hue: normalizedHue,
+                    saturation: normalizedSaturation,
+                  },
+                  bubbles: true,
+                })
+              );
+            });
+
+            this.hueInputElement.addEventListener("input", (event) => {
+              const hue = event.target.value;
+
+              this.dispatchEvent(
+                new CustomEvent("color-picker-form-styling-change", {
+                  detail: {
+                    hue,
+                  },
+                  bubbles: true,
+                })
+              );
+            });
+
+            this.saturationInputElement.addEventListener("input", (event) => {
+              const saturation = event.target.value;
+
+              this.dispatchEvent(
+                new CustomEvent("color-picker-form-styling-change", {
+                  detail: {
+                    saturation: saturation,
+                  },
+                  bubbles: true,
+                })
+              );
+            });
+
+            this.addEventListener(
+              "color-picker-form-styling-change",
+              (event) => {
+                const { spotColor, hue, saturation } = event.detail;
+
+                const checkedP3Element = this.querySelector(
+                  "input[name='display-p3-color']:checked"
+                );
+
+                if (checkedP3Element) {
+                  checkedP3Element.checked = !!spotColor;
+                }
+
+                if (hue) {
+                  this.hueInputElement.value = hue;
+                  this.hueInputElement.parentElement.querySelector(
+                    "output"
+                  ).value = hue;
+                }
+
+                if (saturation) {
+                  this.saturationInputElement.value = saturation;
+                  this.saturationInputElement.parentElement.querySelector(
+                    "output"
+                  ).value = saturation;
+                }
+              }
+            );
+
+            this.querySelector(
+              "fieldset:has(input[name='harmony'])"
+            ).addEventListener("input", (event) => {
+              if (!event.target instanceof HTMLInputElement) {
+                return;
+              }
+
+              if (!event.target.matches("[type=checkbox]")) {
+                return;
+              }
+
+              const checked = event.target.checked;
+              const values = event.target.value.split(",");
+
+              for (const value of values) {
+                Array.from(
+                  window.document.querySelectorAll(`[type~="${value}"]`)
+                ).forEach((element) => {
+                  element.toggleAttribute("hidden", !checked);
+                });
+              }
+
+              this.dispatchEvent(
+                new CustomEvent("color-picker-form-styling-change", {
+                  detail: {
+                    spotColor:
+                      !!window.document.documentElement.style.getPropertyValue(
+                        "--swatch--dynamic--spot-color"
+                      ),
+                  },
+                  bubbles: true,
+                })
+              );
+            });
+          }
+
+          getCssVariablesString() {
+            const colorValues = this.swatchPaletteElements
+              .filter((swatchPaletteElement) => !swatchPaletteElement.hidden)
+              .map((swatchPaletteElement) => {
+                return [
+                  "--" +
+                    swatchPaletteElement
+                      .getAttribute("type")
+                      .split(" ")
+                      .filter((type) => {
+                        return ![
+                          "analagous",
+                          "split",
+                          "tetradic",
+                          "triadic",
+                        ].includes(type);
+                      })
+                      .join("\\"),
+                  Array.from(
+                    swatchPaletteElement.shadowRoot.querySelectorAll(".swatch")
+                  )
+                    .slice(1, -1)
+                    .map((swatchElement, index) => {
+                      const position = `${index + 1}00`;
+
+                      return [
+                        position,
+                        window.getComputedStyle(swatchElement, ":before")
+                          .backgroundColor,
+                      ];
+                    }),
+                ];
+              });
+
+            const cssVariablesString = colorValues
+              .map(([name, swatchEntries]) => {
+                return (
+                  swatchEntries
+                    .map(([shade, color]) => {
+                      const displayName = name.replace(
+                        "split",
+                        "split-complementary"
+                      );
+                      const colorJsValue = new Color(color);
+                      const srgbColorJsValue = colorJsValue.to("srgb");
+                      const { r, g, b } = srgbColorJsValue;
+                      const rgbColor = `rgb(${Math.floor(
+                        r * 255
+                      )}, ${Math.floor(g * 255)}, ${Math.floor(b * 255)})`;
+                      const hexColor = this.getHexFromRGB(rgbColor);
+                      const oklabColor = colorJsValue.to("oklab");
+
+                      return `${displayName}--${shade}: ${hexColor};\n${displayName}--${shade}: ${oklabColor};\n`;
+                    })
+                    .join("\n") + "\n\n"
+                );
+              })
+              .join("\n")
+              .trim();
+
+            return cssVariablesString;
+          }
+
+          getHexFromRGB(rgbValue) {
+            const canvasElement = window.document.createElement("canvas");
+            const canvasElementContext = canvasElement.getContext("2d");
+            canvasElementContext.fillStyle = rgbValue;
+            const { fillStyle: hexValue } = canvasElementContext;
+            canvasElement.remove();
+
+            return hexValue;
+          }
+        }
+      );
+
+      window.customElements.define(
+        "css-variables-textarea",
+        class CssVariablesTextarea extends HTMLElement {
+          constructor() {
+            super();
+
+            this.renderTextarea();
+
+            window.document.documentElement.addEventListener(
+              "color-picker-form-styling-change",
+              () => {
+                this.renderTextarea();
+              }
+            );
+          }
+
+          renderTextarea() {
+            window.document.querySelector("textarea").value = window.document
+              .querySelector("color-picker-form")
+              .getCssVariablesString();
+          }
+        }
+      );
+
+      window.customElements.define(
+        "dark-mode-toggle-button",
+        class DarkModeToggleButton extends HTMLElement {
+          constructor() {
+            super();
+            const buttonElement = this.querySelector("button");
+            buttonElement.addEventListener("click", () => {
+              window.document.body.classList.toggle("dark-mode");
+            });
+          }
+        }
+      );
+    </script>
+    <h1>CSS Color Palette Generator</h1>
+    <dark-mode-toggle-button>
+      <button type="button">Toggle Dark Mode</button>
+    </dark-mode-toggle-button>
+    <color-picker-form>
+      <form>
+        <h2>Palette Configuration</h2>
+        <details open name="option">
+          <summary>HSL Color Picker</summary>
+          <div>
+            <label>
+              Hue
+              <small
+                >&mdash; Angle (0 - 360 degrees, going around the color
+                wheel)</small
+              >
+              <div>
+                <input
+                  type="range"
+                  min="0"
+                  max="360"
+                  value="180"
+                  name="hue"
+                  list="degree-markers"
+                />
+                <datalist id="degree-markers">
+                  <option value="0" label="0deg"></option>
+                  <option value="30" label="30deg"></option>
+                  <option value="60" label="60deg"></option>
+                  <option value="90" label="90deg"></option>
+                  <option value="120" label="120deg"></option>
+                  <option value="150" label="120deg"></option>
+                  <option value="180" label="180deg"></option>
+                  <option value="210" label="180deg"></option>
+                  <option value="240" label="240deg"></option>
+                  <option value="270" label="270deg"></option>
+                  <option value="300" label="300deg"></option>
+                  <option value="330" label="330deg"></option>
+                  <option value="360" label="360deg"></option>
+                </datalist>
+                <output>180</output>
+              </div>
+            </label>
+            <hr />
+            <label>
+              Saturation <small>&mdash; Percentage (0 - 100%)</small>
+              <div>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="75"
+                  name="saturation"
+                  list="percentage-markers"
+                />
+                <datalist id="percentage-markers">
+                  <option value="0" label="0%"></option>
+                  <option value="25" label="25%"></option>
+                  <option value="50" label="50%"></option>
+                  <option value="75" label="75%"></option>
+                  <option value="100" label="100%"></option>
+                </datalist>
+                <output>75</output>
+              </div>
+            </label>
+          </div>
+        </details>
+        <hr />
+
+        <details name="option">
+          <summary>display-p3 Palette</summary>
+          <div>
+            <fieldset>
+              <legend>display-p3 Colors</legend>
+              <label>
+                <input type="radio" name="display-p3-color" value="rosest" />
+                <p>Rosest</p>
+              </label>
+              <label>
+                <input type="radio" name="display-p3-color" value="sour-lime" />
+                <p>Sour Lime</p>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="display-p3-color"
+                  value="ultra-turquoise"
+                />
+                <p>Ultra Turquoise</p>
+              </label>
+              <label>
+                <input type="radio" name="display-p3-color" value="hot-coral" />
+                <p>Hot Coral</p>
+              </label>
+              <label>
+                <input type="radio" name="display-p3-color" value="super-red" />
+                <p>Super Red</p>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="display-p3-color"
+                  value="robins-blue"
+                />
+                <p>Robins Blue</p>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="display-p3-color"
+                  value="super-blue"
+                />
+                <p>Super Blue</p>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="display-p3-color"
+                  value="equinox-green"
+                />
+                <p>Equinox Green</p>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="display-p3-color"
+                  value="anouk-rose"
+                />
+                <p>Anouk Rose</p>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="display-p3-color"
+                  value="super-green"
+                />
+                <p>Super Green</p>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="display-p3-color"
+                  value="super-yellow"
+                />
+                <p>Super Yellow</p>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="display-p3-color"
+                  value="super-fuchsia"
+                />
+                <p>Super Fuchsia</p>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="display-p3-color"
+                  value="green-1907"
+                />
+                <p>Green 1907</p>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="display-p3-color"
+                  value="lighting-violet"
+                />
+                <p>Lighting Violet</p>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="display-p3-color"
+                  value="ultra-cyan"
+                />
+                <p>Ultra Cyan</p>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="display-p3-color"
+                  value="radioactive-lime"
+                />
+                <p>Radioactive Lime</p>
+              </label>
+            </fieldset>
+          </div>
+        </details>
+        <hr />
+        <details name="option">
+          <summary>Additional Palettes</summary>
+          <fieldset>
+            <legend>Harmonies</legend>
+            <label>
+              <input type="checkbox" name="harmony" value="complementary" />
+              <p>Complementary <small>(180 degrees)</small></p>
+            </label>
+            <label>
+              <input type="checkbox" name="harmony" value="analagous" />
+              <p>Analagous <small>(30/60/90/-270/-300/-330 degrees)</small></p>
+            </label>
+            <label>
+              <input type="checkbox" name="harmony" value="triadic" />
+              <p>Triadic <small>(120/240 degrees)</small></p>
+            </label>
+            <label>
+              <input type="checkbox" name="harmony" value="split" />
+              <p>Split Complementary <small>(150/210 degrees)</small></p>
+            </label>
+            <label>
+              <input type="checkbox" name="harmony" value="tetradic" />
+              <p>
+                Tetradic
+                <small>(90/180/270 degrees)</small>
+              </p>
+            </label>
+          </fieldset>
+        </details>
+      </form>
+    </color-picker-form>
+    <hr />
+    <h2>Swatch Palettes</h2>
+    <swatch-palette type="primary" label="Primary" angle="0"></swatch-palette>
+    <swatch-palette
+      type="analagous analagous-1"
+      label="Analagous 1"
+      angle="30"
+      hidden
+    ></swatch-palette>
+    <swatch-palette
+      type="analagous analagous-2"
+      label="Analagous 2"
+      angle="60"
+      hidden
+    ></swatch-palette>
+    <swatch-palette
+      type="analagous analagous-3 tetradic tetradic-1"
+      label="Analagous 3 / Tetradic 1"
+      angle="90"
+      hidden
+    ></swatch-palette>
+    <swatch-palette
+      type="triadic triadic-1"
+      label="Triadic 1"
+      angle="120"
+      hidden
+    ></swatch-palette>
+    <swatch-palette
+      type="split split-1"
+      label="Split Complemenary 1"
+      angle="150"
+      hidden
+    ></swatch-palette>
+    <swatch-palette
+      type="complementary tetradic tetradic-2"
+      label="Tetradic 2 / Complementary"
+      angle="180"
+      hidden
+    ></swatch-palette>
+    <swatch-palette
+      type="split split-2"
+      label="Split Complemenary 2"
+      angle="210"
+      hidden
+    ></swatch-palette>
+    <swatch-palette
+      type="triadic triadic-2"
+      label="Triadic 2"
+      angle="240"
+      hidden
+    ></swatch-palette>
+    <swatch-palette
+      type="tetradic tetradic-3"
+      label="Tetradic 3"
+      angle="270"
+      hidden
+    ></swatch-palette>
+    <swatch-palette
+      type="analagous analagous-negative-3"
+      label="Analagous -3"
+      angle="270"
+      hidden
+    ></swatch-palette>
+    <swatch-palette
+      type="analagous analagous-negative-2"
+      label="Analagous -2"
+      angle="300"
+      hidden
+    ></swatch-palette>
+    <swatch-palette
+      type="analagous analagous-negative-1"
+      label="Analagous -1"
+      angle="330"
+      hidden
+    ></swatch-palette>
+    <h2>Example UI</h2>
+    <example-cards type="primary" label="Primary"></example-cards>
+    <example-cards
+      hidden
+      type="analagous analagous-1"
+      label="Analagous 1 (30 degrees)"
+    ></example-cards>
+    <example-cards
+      hidden
+      type="analagous analagous-2"
+      label="Analagous 2 (60 degrees)"
+    ></example-cards>
+    <example-cards
+      hidden
+      type="analagous tetradic analagous-3 tetradic-1"
+      label="Analagous 3 / Tetradic 1 (90 degrees)"
+    ></example-cards>
+    <example-cards
+      hidden
+      type="triadic triadic-1"
+      label="Triadic 1 (120 degrees)"
+    ></example-cards>
+    <example-cards
+      hidden
+      type="split split-1"
+      label="Split Complementary 1 (150 degrees)"
+    ></example-cards>
+    <example-cards
+      hidden
+      type="complementary tetradic tetradic-2"
+      label="Complementary / Tetradic 2 (180 degrees)"
+    ></example-cards>
+    <example-cards
+      hidden
+      type="split split-2"
+      label="Split Complementary 2 (210 degrees)"
+    ></example-cards>
+    <example-cards
+      hidden
+      type="triadic triadic-2"
+      label="Triadic 2 (240 degrees)"
+    ></example-cards>
+    <example-cards
+      hidden
+      type="tetradic tetradic-3"
+      label="Tetradic 3 (270 degrees)"
+    ></example-cards>
+    <example-cards
+      hidden
+      type="analagous analagous-negative-3"
+      label="Analagous -3 (270 degrees)"
+    ></example-cards>
+    <example-cards
+      hidden
+      type="analagous analagous-negative-2"
+      label="Analagous -2 (300 degrees)"
+    ></example-cards>
+    <example-cards
+      hidden
+      type="analagous analagous-negative-1"
+      label="Analagous -1 (330 degrees)"
+    ></example-cards>
+    <h2>CSS Output</h2>
+    <css-variables-textarea>
+      <textarea></textarea>
+    </css-variables-textarea>
+    <style>
+      @layer default, overrides;
+
+      @layer overrides {
+        .visually-hidden {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          white-space: nowrap;
+          clip: rect(0 0 0 0);
+          margin: -1px;
+          border: 0;
+          padding: 0;
+        }
+
+        textarea {
+          height: 25lh;
+          width: 100%;
+        }
+      }
+
+      @layer default {
+        *,
+        *:before,
+        *:after {
+          box-sizing: border-box;
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        @font-face {
+          font-family: "APCA-Approved-Reference-Font";
+          src: local("Helvetica Neue"), local("Helvetica"), local("Arial");
+        }
+
+        :root {
+          --swatch--named__white: white;
+          --swatch--named__black: black;
+          --swatch--dynamic--hue: 180deg;
+          --swatch--dynamic--saturation: 85%;
+          --swatch--dynamic--lightness: 50%;
+
+          line-height: 1.5;
+          font-family: monospace;
+
+          @media only screen and (width: 768px) and (min-resolution: 2dppx) {
+            @supports (font: -apple-system-body) {
+              font: -apple-system-body, sans-serif;
+            }
+          }
+
+          font-size: 14px;
+        }
+
+        :where(input[type="range"]) {
+          width: 100%;
+        }
+
+        body {
+          font-size: calc((18 / 14) * 1rem);
+          padding: 0 20px;
+          background-color: var(--swatch--named__white);
+          color: var(--swatch--named__black);
+
+          &.dark-mode {
+            background-color: var(--swatch--named__black);
+            color: var(--swatch--named__white);
+            color-scheme: dark;
+          }
+        }
+
+        h2 {
+          font-size: 1.5rem;
+          margin: 1rem 0;
+        }
+
+        form {
+          display: grid;
+        }
+
+        form > label,
+        legend {
+          font-weight: bold;
+        }
+
+        label > div {
+          display: flex;
+          gap: 1ch;
+
+          & > output {
+            font-variant-numeric: tabular-nums;
+            width: 4ch;
+            font-family: monospace;
+            text-align: right;
+          }
+        }
+
+        label:first-of-type output:after {
+          content: "°";
+        }
+
+        label:nth-of-type(2) output:after {
+          content: "%";
+        }
+
+        h1 {
+          display: inline-flex;
+          width: auto;
+          vertical-align: middle;
+          padding-right: 1ch;
+          margin-bottom: 0;
+        }
+
+        h2 {
+          font-size: 1.667rem;
+          margin-top: 0.333em;
+        }
+
+        fieldset {
+          display: grid;
+          gap: 0.5ch;
+          padding: 0.5em 0;
+          margin: 0;
+          margin-top: 0.5em;
+          border: 0;
+
+          @media (min-width: 800px) {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+
+        fieldset label {
+          display: flex;
+          width: max-content;
+          gap: 1ch;
+          align-items: center;
+
+          & p {
+            margin: 0;
+          }
+
+          & small {
+            display: block;
+          }
+        }
+
+        fieldset:has(input[name="display-p3-color"]) label[style] {
+          display: grid;
+          grid-auto-flow: column;
+          align-items: center;
+
+          p {
+            display: flex;
+            align-items: center;
+            gap: 0.5ch;
+          }
+
+          p:before {
+            content: "";
+            display: flex;
+            background-color: var(--swatch);
+            height: 1em;
+            aspect-ratio: 1;
+            width: auto;
+          }
+        }
+
+        hr {
+          margin: 20px 0;
+          border: 0;
+          display: flex;
+          height: 1px;
+          background: #ccc;
+        }
+
+        summary {
+          cursor: pointer;
+        }
+      }
+    </style>
+  </body>
+</html>
