@@ -1,32 +1,43 @@
+@font-face {
+  font-family: "APCA-Approved-Reference-Font";
+  src: local("Helvetica Neue"), local("Helvetica"), local("Arial");
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
+  min-height: 100%;
+  display: grid;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  @media only screen and (width: 768px) and (min-resolution: 2dppx) {
+    @supports (font: -apple-system-body) {
+      font: -apple-system-body;
+    }
   }
-}
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  font-family: monospace;
+  line-height: 1.5;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "APCA-Approved-Reference-Font", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: calc((18 / 14) * 1rem);
+  margin: 20px;
+  display: grid;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
+h1 {
   margin: 0;
 }
 
@@ -35,8 +46,31 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+:where(input[type="range"]) {
+  width: 100%;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
+  clip: rect(0 0 0 0);
+  margin: -1px;
+  border: 0;
+  padding: 0;
+}
+
+textarea {
+  height: 25lh;
+  width: 100%;
+}
+
+fieldset label {
+  display: flex;
 }
