@@ -3,13 +3,7 @@
 import { ColorPickerForm } from "@/components/ColorPickerForm";
 import { ExampleUi } from "@/components/ExampleUi";
 import { SwatchPalette } from "@/components/SwatchPalette";
-import {
-  harmonies,
-  IHarmonyType,
-  ILchArgs,
-  ISwatchPalette,
-  primaryHarmonyType,
-} from "@/types";
+import { harmonies, IHarmonyType, ILchArgs, ISwatchPalette } from "@/types";
 import { useState } from "react";
 import styles from "./page.module.css";
 
@@ -19,28 +13,29 @@ export default function Home() {
   const [enabledHarmonyTypes, setEnabledHarmonyTypes] = useState<
     IHarmonyType[]
   >([]);
-  const enabledHarmonies = Array.from(
-    new Set(
-      [primaryHarmonyType, ...enabledHarmonyTypes]
-        .map((harmonyType) => {
-          return harmonies.filter(({ types }) => types.includes(harmonyType));
-        })
-        .flat()
-    )
-  );
+
+  const enabledHarmonies = harmonies.filter((harmony) => {
+    for (const harmonyType of harmony.types) {
+      if (enabledHarmonyTypes.includes(harmonyType)) {
+        return true;
+      }
+    }
+
+    return harmony.types.includes("primary");
+  });
 
   const swatchPalettes: ISwatchPalette[] = enabledHarmonies.map((harmony) => {
     const localHueAngle = hueAngle + harmony.angleOffset;
     const valueWhite: ILchArgs = [1, 0, localHueAngle];
-    const value100: ILchArgs = [0.9, chromaValue, localHueAngle];
-    const value200: ILchArgs = [0.8, chromaValue, localHueAngle];
-    const value300: ILchArgs = [0.7, chromaValue, localHueAngle];
-    const value400: ILchArgs = [0.6, chromaValue, localHueAngle];
-    const value500: ILchArgs = [0.5, chromaValue, localHueAngle];
-    const value600: ILchArgs = [0.4, chromaValue, localHueAngle];
-    const value700: ILchArgs = [0.3, chromaValue, localHueAngle];
-    const value800: ILchArgs = [0.2, chromaValue, localHueAngle];
-    const value900: ILchArgs = [0.1, chromaValue, localHueAngle];
+    const value100: ILchArgs = [0.95, chromaValue, localHueAngle];
+    const value200: ILchArgs = [0.85, chromaValue, localHueAngle];
+    const value300: ILchArgs = [0.75, chromaValue, localHueAngle];
+    const value400: ILchArgs = [0.65, chromaValue, localHueAngle];
+    const value500: ILchArgs = [0.55, chromaValue, localHueAngle];
+    const value600: ILchArgs = [0.45, chromaValue, localHueAngle];
+    const value700: ILchArgs = [0.35, chromaValue, localHueAngle];
+    const value800: ILchArgs = [0.25, chromaValue, localHueAngle];
+    const value900: ILchArgs = [0.15, chromaValue, localHueAngle];
     const valueBlack: ILchArgs = [0, 0, localHueAngle];
     const palette: Record<string, ILchArgs> = {
       valueWhite,

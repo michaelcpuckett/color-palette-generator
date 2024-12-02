@@ -1,6 +1,6 @@
 "use client";
 
-import { harmonyTypes, IHarmonyType } from "@/types";
+import { IHarmonyType } from "@/types";
 import { Dispatch, FormEventHandler, SetStateAction, useCallback } from "react";
 
 export function ColorPickerForm({
@@ -58,18 +58,20 @@ export function ColorPickerForm({
 
       const isEnabled = inputElement.checked;
       const harmonyType = inputElement.value;
-      const newEnabledHarmonyTypes = Array.from(enabledHarmonyTypes);
 
       if (isEnabled) {
-        newEnabledHarmonyTypes.push(harmonyType as IHarmonyType);
+        setEnabledHarmonyTypes([
+          ...enabledHarmonyTypes,
+          harmonyType as IHarmonyType,
+        ]);
       } else {
-        const harmonyTypeIndex = harmonyTypes.indexOf(
-          harmonyType as IHarmonyType
+        setEnabledHarmonyTypes(
+          enabledHarmonyTypes.filter(
+            (enabledHarmonyType) =>
+              enabledHarmonyType !== (harmonyType as IHarmonyType)
+          )
         );
-        newEnabledHarmonyTypes.splice(harmonyTypeIndex, 1);
       }
-
-      setEnabledHarmonyTypes(newEnabledHarmonyTypes);
     },
     [setEnabledHarmonyTypes, enabledHarmonyTypes]
   );
@@ -110,13 +112,13 @@ export function ColorPickerForm({
       <details>
         <summary>Advanced</summary>
         <label>
-          Chroma (Float)
+          Chroma (Intensity)
           <div>
             <input
               onChange={handleChromaValueChange}
               type="range"
               min=".1"
-              max=".45"
+              max=".4"
               step=".01"
               defaultValue={chromaValue}
               name="chroma"
@@ -134,68 +136,65 @@ export function ColorPickerForm({
         </label>
       </details>
       <hr />
-      <details>
-        <summary>Additional Palettes</summary>
-        <fieldset>
-          <legend>Harmonies</legend>
-          <label>
-            <input
-              onInput={handleEnabledHarmonyTypesChange}
-              type="checkbox"
-              name="harmony"
-              value="complementary"
-            />
-            <p>
-              Complementary <small>(180 degrees)</small>
-            </p>
-          </label>
-          <label>
-            <input
-              onInput={handleEnabledHarmonyTypesChange}
-              type="checkbox"
-              name="harmony"
-              value="analagous"
-            />
-            <p>
-              Analagous <small>(30/60/90/-270/-300/-330 degrees)</small>
-            </p>
-          </label>
-          <label>
-            <input
-              onInput={handleEnabledHarmonyTypesChange}
-              type="checkbox"
-              name="harmony"
-              value="triadic"
-            />
-            <p>
-              Triadic <small>(120/240 degrees)</small>
-            </p>
-          </label>
-          <label>
-            <input
-              onInput={handleEnabledHarmonyTypesChange}
-              type="checkbox"
-              name="harmony"
-              value="split"
-            />
-            <p>
-              Split Complementary <small>(150/210 degrees)</small>
-            </p>
-          </label>
-          <label>
-            <input
-              onInput={handleEnabledHarmonyTypesChange}
-              type="checkbox"
-              name="harmony"
-              value="tetradic"
-            />
-            <p>
-              Tetradic
-              <small>(90/180/270 degrees)</small>
-            </p>
-          </label>
-        </fieldset>
-      </details>
+      <fieldset>
+        <legend>Harmonies</legend>
+        <label>
+          <input
+            onInput={handleEnabledHarmonyTypesChange}
+            type="checkbox"
+            name="harmony"
+            value="complementary"
+          />
+          <p>
+            Complementary <small>(180 degrees)</small>
+          </p>
+        </label>
+        <label>
+          <input
+            onInput={handleEnabledHarmonyTypesChange}
+            type="checkbox"
+            name="harmony"
+            value="analagous"
+          />
+          <p>
+            Analagous <small>(30/60/90/-270/-300/-330 degrees)</small>
+          </p>
+        </label>
+        <label>
+          <input
+            onInput={handleEnabledHarmonyTypesChange}
+            type="checkbox"
+            name="harmony"
+            value="triadic"
+          />
+          <p>
+            Triadic <small>(120/240 degrees)</small>
+          </p>
+        </label>
+        <label>
+          <input
+            onInput={handleEnabledHarmonyTypesChange}
+            type="checkbox"
+            name="harmony"
+            value="split"
+          />
+          <p>
+            Split Complementary <small>(150/210 degrees)</small>
+          </p>
+        </label>
+        <label>
+          <input
+            onInput={handleEnabledHarmonyTypesChange}
+            type="checkbox"
+            name="harmony"
+            value="tetradic"
+          />
+          <p>
+            Tetradic
+            <small>(90/180/270 degrees)</small>
+          </p>
+        </label>
+      </fieldset>
     </form>
   );
 }
