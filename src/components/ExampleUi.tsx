@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import styles from "./ExampleUi.module.css";
 
 export function ExampleUi({
-  swatchPalette: { label, oklchStyles },
+  swatchPalette: { label, style },
 }: {
   swatchPalette: ISwatchPalette;
 }) {
@@ -28,7 +28,7 @@ export function ExampleUi({
   return (
     <Fragment>
       <h3>{label}</h3>
-      <div className={styles.cards} style={oklchStyles}>
+      <div className={styles.cards} style={style}>
         {cardMarkup}
         {cardMarkup}
         {cardMarkup}

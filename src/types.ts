@@ -1,3 +1,8 @@
+export const oklchColorSpace = "oklch" as const;
+export const hslColorSpace = "hsl" as const;
+
+export type IColorSpace = typeof oklchColorSpace | typeof hslColorSpace;
+
 export const analgousHarmonyType = "analagous" as const;
 export const tetradicHarmonyType = "tetradic" as const;
 export const triadicHarmonyType = "triadic" as const;
@@ -30,10 +35,10 @@ export type IHarmony = {
 };
 
 export type ISwatchPalette = IHarmony & {
-  oklchStyles: Record<string, string>;
+  style: Record<string, string>;
 };
 
-export type ILchArgs = [number, number, number];
+export type IColorSet = [number, number, number];
 
 export const harmonies: Array<IHarmony> = [
   {

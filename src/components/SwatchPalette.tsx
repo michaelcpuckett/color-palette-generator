@@ -3,14 +3,14 @@ import { Fragment } from "react";
 import styles from "./SwatchPalette.module.css";
 
 export function SwatchPalette({
-  swatchPalette: { label, oklchStyles },
+  swatchPalette: { label, style },
 }: {
   swatchPalette: ISwatchPalette;
 }) {
   return (
     <Fragment>
       <h3>{label}</h3>
-      <div className={styles.swatches} style={oklchStyles}>
+      <div className={styles.swatches} style={style}>
         <div className="swatch swatch--white">
           <small>White</small>
         </div>
