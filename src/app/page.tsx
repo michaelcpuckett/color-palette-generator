@@ -14,6 +14,9 @@ import Color from "colorjs.io";
 import { useState } from "react";
 import styles from "./page.module.css";
 
+const clampToRgbRange = (n: number) =>
+  Math.min(255, Math.max(0, Math.round(n * 255)));
+
 function getHslStyles(saturationPercentage: number, localHueAngle: number) {
   const valueWhite: IColorSet = [localHueAngle, saturationPercentage, 100];
   const value100: IColorSet = [localHueAngle, saturationPercentage, 90];
@@ -126,20 +129,13 @@ export default function Home() {
       Object.entries(swatchPalette.style)
         .slice(1, 10)
         .map(([key, value]) => {
-          const colorJsValue = new Color(value);
-          const { r, g, b } = colorJsValue.to("srgb");
-          const fallbackValue = `rgb(${Math.max(
-            0,
-            Math.round(r * 255)
-          )}, ${Math.max(0, Math.round(g * 255))}, ${Math.max(
-            0,
-            Math.round(b * 255)
-          )})`;
-          return `--swatch--${swatchPalette.cssIdentifier}--${
-            key.split("--")[3]
-          }: ${fallbackValue};\n--swatch--${swatchPalette.cssIdentifier}--${
-            key.split("--")[3]
-          }: ${value};\n\n`;
+          const [, , , swatchValue] = key.split("--");
+          const customProperty = `--swatch--${swatchPalette.cssIdentifier}--${swatchValue}`;
+          const fallbackValue = new Color(value)
+            .to("srgb")
+            .toString({ format: "hex" });
+
+          return `${customProperty}: ${fallbackValue};\n${customProperty}: ${value};\n\n`;
         })
     )
     .flat()
