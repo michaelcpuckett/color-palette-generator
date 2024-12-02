@@ -15,13 +15,6 @@
   --foreground: #171717;
   min-height: 100%;
   display: grid;
-
-  @media only screen and (width: 768px) and (min-resolution: 2dppx) {
-    @supports (font: -apple-system-body) {
-      font: -apple-system-body;
-    }
-  }
-
   font-family: monospace;
   line-height: 1.5;
 }
@@ -29,12 +22,13 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "APCA-Approved-Reference-Font", sans-serif;
+  font-family: monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: calc((18 / 14) * 1rem);
   margin: 20px;
   display: grid;
+  overscroll-behavior: none;
 }
 
 h1 {
@@ -96,4 +90,9 @@ fieldset label p {
   & small {
     font-weight: normal;
   }
+}
+
+label div {
+  display: flex;
+  gap: 1rem;
 }

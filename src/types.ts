@@ -56,7 +56,7 @@ export const harmonies: Array<IHarmony> = [
   },
   {
     types: [analgousHarmonyType, tetradicHarmonyType],
-    cssIdentifier: "analagous-3/tetradic-1",
+    cssIdentifier: "analagous-3\\tetradic-1",
     label: "Analagous 3 / Tetradic 1",
     angleOffset: 90,
   },
@@ -74,7 +74,7 @@ export const harmonies: Array<IHarmony> = [
   },
   {
     types: [complementaryHarmonyType, tetradicHarmonyType],
-    cssIdentifier: "complementary/tetradic-2",
+    cssIdentifier: "complementary\\tetradic-2",
     angleOffset: 180,
     label: "Complementary / Tetradic 2",
   },

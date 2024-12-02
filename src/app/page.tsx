@@ -96,7 +96,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <h1>CSS Color Palette Generator</h1>
+        <h1>OKLCH Color Palette Generator</h1>
         <ColorPickerForm
           setChromaValue={setChromaValue}
           chromaValue={chromaValue}

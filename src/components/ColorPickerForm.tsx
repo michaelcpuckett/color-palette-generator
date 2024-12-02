@@ -108,32 +108,29 @@ export function ColorPickerForm({
           <output>{hueAngle}°</output>
         </div>
       </label>
-      <details>
-        <summary>Advanced</summary>
-        <label>
-          Chroma (Intensity)
-          <div>
-            <input
-              onChange={handleChromaValueChange}
-              type="range"
-              min=".1"
-              max=".3"
-              step=".01"
-              defaultValue={chromaValue}
-              name="chroma"
-              list="percentage-markers"
-            />
-            <datalist id="percentage-markers">
-              <option value="0" label="0%"></option>
-              <option value="25" label="25%"></option>
-              <option value="50" label="50%"></option>
-              <option value="75" label="75%"></option>
-              <option value="100" label="100%"></option>
-            </datalist>
-            <output>{chromaValue}</output>
-          </div>
-        </label>
-      </details>
+      <label>
+        Chroma (Intensity)
+        <div>
+          <input
+            onChange={handleChromaValueChange}
+            type="range"
+            min=".1"
+            max=".3"
+            step=".01"
+            defaultValue={chromaValue}
+            name="chroma"
+            list="percentage-markers"
+          />
+          <datalist id="percentage-markers">
+            <option value="0" label="0%"></option>
+            <option value="25" label="25%"></option>
+            <option value="50" label="50%"></option>
+            <option value="75" label="75%"></option>
+            <option value="100" label="100%"></option>
+          </datalist>
+          <output>{chromaValue}</output>
+        </div>
+      </label>
       <fieldset>
         <legend>Harmonies</legend>
         <label>
