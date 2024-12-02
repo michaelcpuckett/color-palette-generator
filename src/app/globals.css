@@ -77,9 +77,10 @@ fieldset {
   margin: 0;
 }
 
-fieldset label {
+fieldset label:not([hidden]) {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 
 fieldset label p {
@@ -95,6 +96,11 @@ fieldset label p {
 label div {
   display: flex;
   gap: 1rem;
+}
+
+output {
+  width: 5ch;
+  overflow: hidden;
 }
 
 :where(input[type="range"]) {

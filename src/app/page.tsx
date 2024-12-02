@@ -161,7 +161,6 @@ export default function Home() {
           setEnabledHarmonyTypes={setEnabledHarmonyTypes}
           enabledHarmonyTypes={enabledHarmonyTypes}
         />
-        <hr />
         <h2>CSS Output</h2>
         <textarea readOnly value={textareaStyles} />
       </div>
