@@ -144,6 +144,9 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
+      <nav>
+        <a href="#code">Jump to the Code</a>
+      </nav>
       <main className={styles.main}>
         <h1>OKLCH/HSL Color Palette Generator</h1>
         <ColorPickerForm
@@ -174,7 +177,9 @@ export default function Home() {
           ></ExampleUi>
         ))}
         <hr />
-        <h2>CSS Output</h2>
+        <h2 id="code" tabIndex={-1}>
+          CSS Output
+        </h2>
         <textarea readOnly value={textareaStyles} />
       </main>
     </div>

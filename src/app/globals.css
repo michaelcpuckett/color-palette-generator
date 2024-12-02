@@ -35,11 +35,6 @@ h1 {
   margin: 0;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
 :where(input[type="range"]) {
   width: 100%;
 }
