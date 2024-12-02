@@ -235,7 +235,7 @@ export function ColorPickerForm({
             value="analagous"
           />
           <p>
-            Analagous <small>(30/60/90/-270/-300/-330 degrees)</small>
+            Analagous <small>(30/60/90/270/300/330 degrees)</small>
           </p>
         </label>
         <label>
