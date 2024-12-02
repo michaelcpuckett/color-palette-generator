@@ -108,7 +108,6 @@ export function ColorPickerForm({
           <output>{hueAngle}°</output>
         </div>
       </label>
-      <hr />
       <details>
         <summary>Advanced</summary>
         <label>
@@ -118,7 +117,7 @@ export function ColorPickerForm({
               onChange={handleChromaValueChange}
               type="range"
               min=".1"
-              max=".4"
+              max=".3"
               step=".01"
               defaultValue={chromaValue}
               name="chroma"
@@ -135,7 +134,6 @@ export function ColorPickerForm({
           </div>
         </label>
       </details>
-      <hr />
       <fieldset>
         <legend>Harmonies</legend>
         <label>

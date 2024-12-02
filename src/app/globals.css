@@ -51,7 +51,10 @@ a {
 }
 
 h2 {
-  font-size: 1.5rem;
+  margin: 1rem 0 0;
+}
+
+h3 {
   margin: 1rem 0;
 }
 

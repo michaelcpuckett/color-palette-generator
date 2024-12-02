@@ -4,6 +4,7 @@ import { ColorPickerForm } from "@/components/ColorPickerForm";
 import { ExampleUi } from "@/components/ExampleUi";
 import { SwatchPalette } from "@/components/SwatchPalette";
 import { harmonies, IHarmonyType, ILchArgs, ISwatchPalette } from "@/types";
+import Color from "colorjs.io";
 import { useState } from "react";
 import styles from "./page.module.css";
 
@@ -68,6 +69,30 @@ export default function Home() {
     };
   });
 
+  const textareaStyles = swatchPalettes
+    .map((swatchPalette) =>
+      Object.entries(swatchPalette.oklchStyles)
+        .slice(1, 10)
+        .map(([key, value]) => {
+          const colorJsValue = new Color(value);
+          const { r, g, b } = colorJsValue.to("srgb");
+          const fallbackValue = `rgb(${Math.max(
+            0,
+            Math.round(r * 255)
+          )}, ${Math.max(0, Math.round(g * 255))}, ${Math.max(
+            0,
+            Math.round(b * 255)
+          )})`;
+          return `--swatch--${swatchPalette.cssIdentifier}--${
+            key.split("--")[3]
+          }: ${fallbackValue};\n--swatch--${swatchPalette.cssIdentifier}--${
+            key.split("--")[3]
+          }: ${value};\n\n`;
+        })
+    )
+    .flat()
+    .join("");
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -87,6 +112,7 @@ export default function Home() {
             swatchPalette={swatchPalette}
           ></SwatchPalette>
         ))}
+        <hr />
         <h2>Example UI</h2>
         {swatchPalettes.map((swatchPalette) => (
           <ExampleUi
@@ -94,6 +120,9 @@ export default function Home() {
             swatchPalette={swatchPalette}
           ></ExampleUi>
         ))}
+        <hr />
+        <h2>CSS Output</h2>
+        <textarea readOnly value={textareaStyles} />
       </main>
     </div>
   );
