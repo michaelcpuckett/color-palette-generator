@@ -14,9 +14,6 @@ import Color from "colorjs.io";
 import { useState } from "react";
 import styles from "./page.module.css";
 
-const clampToRgbRange = (n: number) =>
-  Math.min(255, Math.max(0, Math.round(n * 255)));
-
 function getHslStyles(saturationPercentage: number, localHueAngle: number) {
   const valueWhite: IColorSet = [localHueAngle, saturationPercentage, 100];
   const value100: IColorSet = [localHueAngle, saturationPercentage, 90];
