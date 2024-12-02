@@ -141,11 +141,14 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      <nav>
-        <a href="#code">Jump to the Code</a>
-      </nav>
-      <main className={styles.main}>
+      <header>
         <h1>OKLCH/HSL Color Palette Generator</h1>
+        <a href="https://github.com/michaelcpuckett/oklab-color-palette-generator">
+          Github
+        </a>
+      </header>
+      <div>
+        <h2>Configuration</h2>
         <ColorPickerForm
           setColorSpace={setColorSpace}
           colorSpace={colorSpace}
@@ -158,6 +161,11 @@ export default function Home() {
           setEnabledHarmonyTypes={setEnabledHarmonyTypes}
           enabledHarmonyTypes={enabledHarmonyTypes}
         />
+        <hr />
+        <h2>CSS Output</h2>
+        <textarea readOnly value={textareaStyles} />
+      </div>
+      <main className={styles.main}>
         <h2>Swatch Palettes</h2>
         {swatchPalettes.map((swatchPalette) => (
           <SwatchPalette
@@ -173,11 +181,6 @@ export default function Home() {
             swatchPalette={swatchPalette}
           ></ExampleUi>
         ))}
-        <hr />
-        <h2 id="code" tabIndex={-1}>
-          CSS Output
-        </h2>
-        <textarea readOnly value={textareaStyles} />
       </main>
     </div>
   );

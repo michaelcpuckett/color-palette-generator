@@ -11,22 +11,22 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #171717;
+  --foreground: #ffffff;
+  color-scheme: dark;
   min-height: 100%;
   display: grid;
   font-family: monospace;
   line-height: 1.5;
+  font-size: calc((18 / 16) * 100%);
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: calc((18 / 14) * 1rem);
-  margin: 20px;
+  margin: 0;
   display: grid;
   overscroll-behavior: none;
 }
@@ -35,12 +35,19 @@ h1 {
   margin: 0;
 }
 
-:where(input[type="range"]) {
-  width: 100%;
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1em;
 }
 
 h2 {
   margin: 1rem 0 0;
+}
+
+h2:first-child {
+  margin-top: 0;
 }
 
 h3 {
@@ -58,9 +65,8 @@ h3 {
   padding: 0;
 }
 
-textarea {
-  height: 25lh;
-  width: 100%;
+main {
+  padding: 0 1px;
 }
 
 fieldset {
@@ -74,7 +80,6 @@ fieldset {
 fieldset label {
   display: flex;
   gap: 1rem;
-  flex-wrap: wrap;
 }
 
 fieldset label p {
@@ -90,4 +95,14 @@ fieldset label p {
 label div {
   display: flex;
   gap: 1rem;
+}
+
+:where(input[type="range"]) {
+  width: 100%;
+}
+
+textarea {
+  height: 25lh;
+  width: 100%;
+  font-family: monospace;
 }
