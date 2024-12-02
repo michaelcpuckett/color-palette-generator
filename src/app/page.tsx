@@ -11,7 +11,7 @@ import {
   ISwatchPalette,
 } from "@/types";
 import Color from "colorjs.io";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import styles from "./page.module.css";
 
 function getHslStyles(saturationPercentage: number, localHueAngle: number) {
@@ -140,47 +140,65 @@ export default function Home() {
     .trim();
 
   return (
-    <div className={styles.page}>
+    <Fragment>
       <header>
         <h1>OKLCH/HSL Color Palette Generator</h1>
         <a href="https://github.com/michaelcpuckett/oklab-color-palette-generator">
           Github
         </a>
       </header>
-      <div>
-        <h2>Configuration</h2>
-        <ColorPickerForm
-          setColorSpace={setColorSpace}
-          colorSpace={colorSpace}
-          setSaturationPercentage={setSaturationPercentage}
-          saturationPercentage={saturationPercentage}
-          setChromaValue={setChromaValue}
-          chromaValue={chromaValue}
-          setHueAngle={setHueAngle}
-          hueAngle={hueAngle}
-          setEnabledHarmonyTypes={setEnabledHarmonyTypes}
-          enabledHarmonyTypes={enabledHarmonyTypes}
-        />
-        <h2>CSS Output</h2>
-        <textarea readOnly value={textareaStyles} />
-      </div>
-      <main className={styles.main}>
-        <h2>Swatch Palettes</h2>
-        {swatchPalettes.map((swatchPalette) => (
-          <SwatchPalette
-            key={swatchPalette.label}
-            swatchPalette={swatchPalette}
-          ></SwatchPalette>
-        ))}
-        <hr />
-        <h2>Example UI</h2>
-        {swatchPalettes.map((swatchPalette) => (
-          <ExampleUi
-            key={swatchPalette.label}
-            swatchPalette={swatchPalette}
-          ></ExampleUi>
-        ))}
+      <main className={styles.page}>
+        <div>
+          <details open aria-labelledby="summary--configuration">
+            <summary id="summary--configuration">Configuration</summary>
+            <div>
+              <h2>Configuration</h2>
+              <ColorPickerForm
+                setColorSpace={setColorSpace}
+                colorSpace={colorSpace}
+                setSaturationPercentage={setSaturationPercentage}
+                saturationPercentage={saturationPercentage}
+                setChromaValue={setChromaValue}
+                chromaValue={chromaValue}
+                setHueAngle={setHueAngle}
+                hueAngle={hueAngle}
+                setEnabledHarmonyTypes={setEnabledHarmonyTypes}
+                enabledHarmonyTypes={enabledHarmonyTypes}
+              />
+            </div>
+          </details>
+          <details open aria-labelledby="summary--css-output">
+            <summary id="summary--css-output">CSS Output</summary>
+            <textarea readOnly value={textareaStyles} />
+          </details>
+        </div>
+        <div className="main">
+          <details open aria-labelledby="summary--swatch-palettes">
+            <summary id="summary--swatch-palettes">Swatch Palettes</summary>
+            <div>
+              <h2>Swatch Palettes</h2>
+              {swatchPalettes.map((swatchPalette) => (
+                <SwatchPalette
+                  key={swatchPalette.label}
+                  swatchPalette={swatchPalette}
+                ></SwatchPalette>
+              ))}
+            </div>
+          </details>
+          <details open aria-labelledby="summary--example-ui">
+            <summary id="summary--example-ui">Example UI</summary>
+            <div>
+              <h2>Example UI</h2>
+              {swatchPalettes.map((swatchPalette) => (
+                <ExampleUi
+                  key={swatchPalette.label}
+                  swatchPalette={swatchPalette}
+                ></ExampleUi>
+              ))}
+            </div>
+          </details>
+        </div>
       </main>
-    </div>
+    </Fragment>
   );
 }

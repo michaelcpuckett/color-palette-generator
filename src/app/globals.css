@@ -16,6 +16,7 @@
   color-scheme: dark;
   min-height: 100%;
   display: grid;
+  align-content: start;
   font-family: monospace;
   line-height: 1.5;
   font-size: calc((18 / 16) * 100%);
@@ -28,6 +29,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   display: grid;
+  min-height: 100%;
   overscroll-behavior: none;
 }
 
@@ -47,7 +49,20 @@ h2 {
 }
 
 h2:first-child {
-  margin-top: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
+  clip: rect(0 0 0 0);
+  margin: -1px;
+  border: 0;
+  padding: 0;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.333em;
 }
 
 h3 {
@@ -65,7 +80,16 @@ h3 {
   padding: 0;
 }
 
-main {
+details + details {
+  margin-top: 1em;
+}
+
+header {
+  padding: 1em;
+  border-bottom: 1px solid;
+}
+
+.main {
   padding: 0 1px;
 }
 

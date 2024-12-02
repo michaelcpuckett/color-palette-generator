@@ -114,7 +114,7 @@ export function ColorPickerForm({
   );
 
   return (
-    <form>
+    <form role="form">
       <fieldset>
         <legend>Color Space</legend>
         <label>
