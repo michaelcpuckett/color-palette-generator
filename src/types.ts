@@ -3,7 +3,7 @@ export const hslColorSpace = "hsl" as const;
 
 export type IColorSpace = typeof oklchColorSpace | typeof hslColorSpace;
 
-export const analgousHarmonyType = "analagous" as const;
+export const analgousHarmonyType = "analogous" as const;
 export const tetradicHarmonyType = "tetradic" as const;
 export const triadicHarmonyType = "triadic" as const;
 export const splitHarmonyType = "split" as const;
@@ -49,20 +49,20 @@ export const harmonies: Array<IHarmony> = [
   },
   {
     types: [analgousHarmonyType],
-    cssIdentifier: "analagous-1",
-    label: "Analagous 1",
+    cssIdentifier: "analogous-1",
+    label: "Analogous 1",
     angleOffset: 30,
   },
   {
     types: [analgousHarmonyType],
-    cssIdentifier: "analagous-2",
-    label: "Analagous 2",
+    cssIdentifier: "analogous-2",
+    label: "Analogous 2",
     angleOffset: 60,
   },
   {
     types: [analgousHarmonyType, tetradicHarmonyType],
-    cssIdentifier: "analagous-3\\tetradic-1",
-    label: "Analagous 3 / Tetradic 1",
+    cssIdentifier: "analogous-3\\tetradic-1",
+    label: "Analogous 3 / Tetradic 1",
     angleOffset: 90,
   },
   {
@@ -103,20 +103,20 @@ export const harmonies: Array<IHarmony> = [
   },
   {
     types: [analgousHarmonyType],
-    cssIdentifier: "analagous-negative-3",
+    cssIdentifier: "analogous-negative-3",
     angleOffset: 270,
-    label: "Analagous -3",
+    label: "Analogous -3",
   },
   {
     types: [analgousHarmonyType],
-    cssIdentifier: "analagous-negative-2",
+    cssIdentifier: "analogous-negative-2",
     angleOffset: 300,
-    label: "Analagous -2",
+    label: "Analogous -2",
   },
   {
     types: [analgousHarmonyType],
-    cssIdentifier: "analagous-negative-1",
+    cssIdentifier: "analogous-negative-1",
     angleOffset: 330,
-    label: "Analagous -1",
+    label: "Analogous -1",
   },
 ] as const;

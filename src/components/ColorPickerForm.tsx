@@ -199,20 +199,12 @@ export function ColorPickerForm({
             <input
               onChange={handleChromaValueChange}
               type="range"
-              min=".1"
-              max=".3"
+              min="0"
+              max=".2"
               step=".01"
               defaultValue={chromaValue}
               name="chroma"
-              list="percentage-markers"
             />
-            <datalist id="percentage-markers">
-              <option value="0" label="0%"></option>
-              <option value="25" label="25%"></option>
-              <option value="50" label="50%"></option>
-              <option value="75" label="75%"></option>
-              <option value="100" label="100%"></option>
-            </datalist>
             <output>{chromaValue}</output>
           </div>
         </label>
@@ -223,6 +215,7 @@ export function ColorPickerForm({
           <input
             onInput={handleEnabledHarmonyTypesChange}
             type="checkbox"
+            defaultChecked
             name="harmony"
             value="complementary"
           />
@@ -234,17 +227,19 @@ export function ColorPickerForm({
           <input
             onInput={handleEnabledHarmonyTypesChange}
             type="checkbox"
+            defaultChecked
             name="harmony"
-            value="analagous"
+            value="analogous"
           />
           <p>
-            Analagous <small>(30/60/90/270/300/330 degrees)</small>
+            Analogous <small>(30/60/90/270/300/330 degrees)</small>
           </p>
         </label>
         <label>
           <input
             onInput={handleEnabledHarmonyTypesChange}
             type="checkbox"
+            defaultChecked
             name="harmony"
             value="triadic"
           />
@@ -256,6 +251,7 @@ export function ColorPickerForm({
           <input
             onInput={handleEnabledHarmonyTypesChange}
             type="checkbox"
+            defaultChecked
             name="harmony"
             value="split"
           />
@@ -267,6 +263,7 @@ export function ColorPickerForm({
           <input
             onInput={handleEnabledHarmonyTypesChange}
             type="checkbox"
+            defaultChecked
             name="harmony"
             value="tetradic"
           />
