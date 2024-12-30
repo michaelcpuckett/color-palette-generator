@@ -52,15 +52,51 @@ function getOklchStyles(chromaValue: number, localHueAngle: number) {
   const minLightness = 0.1;
   const numSwatches = 9;
   const lightnessStep = (maxLightness - minLightness) / numSwatches;
-  const value100: IColorSet = [lightnessStep * 9, chromaValue, localHueAngle];
-  const value200: IColorSet = [lightnessStep * 8, chromaValue, localHueAngle];
-  const value300: IColorSet = [lightnessStep * 7, chromaValue, localHueAngle];
-  const value400: IColorSet = [lightnessStep * 6, chromaValue, localHueAngle];
-  const value500: IColorSet = [lightnessStep * 5, chromaValue, localHueAngle];
-  const value600: IColorSet = [lightnessStep * 4, chromaValue, localHueAngle];
-  const value700: IColorSet = [lightnessStep * 3, chromaValue, localHueAngle];
-  const value800: IColorSet = [lightnessStep * 2, chromaValue, localHueAngle];
-  const value900: IColorSet = [lightnessStep * 1, chromaValue, localHueAngle];
+  const value100: IColorSet = [
+    Math.round(lightnessStep * 9 * 10) / 10,
+    chromaValue,
+    localHueAngle,
+  ];
+  const value200: IColorSet = [
+    Math.round(lightnessStep * 8 * 10) / 10,
+    chromaValue,
+    localHueAngle,
+  ];
+  const value300: IColorSet = [
+    Math.round(lightnessStep * 7 * 10) / 10,
+    chromaValue,
+    localHueAngle,
+  ];
+  const value400: IColorSet = [
+    Math.round(lightnessStep * 6 * 10) / 10,
+    chromaValue,
+    localHueAngle,
+  ];
+  const value500: IColorSet = [
+    Math.round(lightnessStep * 5 * 10) / 10,
+    chromaValue,
+    localHueAngle,
+  ];
+  const value600: IColorSet = [
+    Math.round(lightnessStep * 4 * 10) / 10,
+    chromaValue,
+    localHueAngle,
+  ];
+  const value700: IColorSet = [
+    Math.round(lightnessStep * 3 * 10) / 10,
+    chromaValue,
+    localHueAngle,
+  ];
+  const value800: IColorSet = [
+    Math.round(lightnessStep * 2 * 10) / 10,
+    chromaValue,
+    localHueAngle,
+  ];
+  const value900: IColorSet = [
+    Math.round(lightnessStep * 1 * 10) / 10,
+    chromaValue,
+    localHueAngle,
+  ];
   const palette: Record<string, IColorSet> = {
     value100,
     value200,
@@ -115,18 +151,16 @@ export default function Home() {
 
   const textareaStyles = swatchPalettes
     .map((swatchPalette) =>
-      Object.entries(swatchPalette.style)
-        .slice(1, 10)
-        .map(([key, value]) => {
-          const [, , , swatchValue] = key.split("--");
-          const customProperty = `--swatch--${swatchPalette.cssIdentifier}--${swatchValue}`;
+      Object.entries(swatchPalette.style).map(([key, value]) => {
+        const [, , , swatchValue] = key.split("--");
+        const customProperty = `--swatch--${swatchPalette.cssIdentifier}--${swatchValue}`;
 
-          const fallbackValue = new Color(value)
-            .to("srgb")
-            .toString({ format: "hex" });
+        const fallbackValue = new Color(value)
+          .to("srgb")
+          .toString({ format: "hex" });
 
-          return `${customProperty}: ${fallbackValue};\n${customProperty}: ${value};\n\n`;
-        })
+        return `${customProperty}: ${fallbackValue};\n${customProperty}: ${value};\n\n`;
+      })
     )
     .flat()
     .join("")
@@ -160,7 +194,7 @@ export default function Home() {
               />
             </div>
           </details>
-          <details open aria-labelledby="summary--css-output">
+          <details aria-labelledby="summary--css-output">
             <summary id="summary--css-output">CSS Output</summary>
             <textarea readOnly value={textareaStyles} />
           </details>

@@ -11,9 +11,7 @@
 }
 
 :root {
-  --background: #171717;
-  --foreground: #ffffff;
-  color-scheme: dark;
+  color-scheme: light dark;
   min-height: 100%;
   display: grid;
   align-content: start;
@@ -23,8 +21,6 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
