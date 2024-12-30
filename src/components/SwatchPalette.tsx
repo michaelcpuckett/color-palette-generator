@@ -2,7 +2,10 @@ import { ISwatchPalette } from "@/types";
 import { Fragment } from "react";
 import styles from "./SwatchPalette.module.css";
 
-const lightnessValues = [100, 200, 300, 400, 500, 600, 700, 800, 900];
+const lightnessValues = [
+  0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750,
+  800, 850, 900, 950,
+];
 
 export function SwatchPalette({
   swatchPalette: { label, style },
@@ -18,6 +21,11 @@ export function SwatchPalette({
             key={lightnessValue}
             className={`swatch swatch--${lightnessValue}`}
           >
+            <div
+              style={{
+                backgroundColor: `var(--swatch--dynamic--${lightnessValue})`,
+              }}
+            />
             <small>{lightnessValue}</small>
           </div>
         ))}

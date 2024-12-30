@@ -1,13 +1,11 @@
 "use client";
 
-import { IColorSpace, IHarmonyType } from "@/types";
+import { IColorProfile, IHarmonyType } from "@/types";
 import { Dispatch, FormEventHandler, SetStateAction, useCallback } from "react";
 
 export function ColorPickerForm({
-  setColorSpace,
-  colorSpace,
-  setSaturationPercentage,
-  saturationPercentage,
+  setColorProfile,
+  colorProfile,
   setChromaValue,
   chromaValue,
   setHueAngle,
@@ -15,10 +13,8 @@ export function ColorPickerForm({
   setEnabledHarmonyTypes,
   enabledHarmonyTypes,
 }: {
-  setColorSpace: Dispatch<SetStateAction<IColorSpace>>;
-  colorSpace: IColorSpace;
-  setSaturationPercentage: Dispatch<SetStateAction<number>>;
-  saturationPercentage: number;
+  setColorProfile: Dispatch<SetStateAction<IColorProfile>>;
+  colorProfile: IColorProfile;
   setChromaValue: Dispatch<SetStateAction<number>>;
   chromaValue: number;
   setHueAngle: Dispatch<SetStateAction<number>>;
@@ -26,7 +22,7 @@ export function ColorPickerForm({
   setEnabledHarmonyTypes: Dispatch<SetStateAction<IHarmonyType[]>>;
   enabledHarmonyTypes: IHarmonyType[];
 }) {
-  const handleColorSpaceChange = useCallback<FormEventHandler>(
+  const handleColorProfileChange = useCallback<FormEventHandler>(
     (event) => {
       const inputElement = event.target;
 
@@ -36,10 +32,11 @@ export function ColorPickerForm({
 
       const value = inputElement.value;
 
-      setColorSpace(value as IColorSpace);
+      setColorProfile(value as IColorProfile);
     },
-    [setColorSpace]
+    [setColorProfile]
   );
+
   const handleChromaValueChange = useCallback<FormEventHandler>(
     (event) => {
       const inputElement = event.target;
@@ -98,46 +95,8 @@ export function ColorPickerForm({
     [setEnabledHarmonyTypes, enabledHarmonyTypes]
   );
 
-  const handleSaturationPercentageChange = useCallback<FormEventHandler>(
-    (event) => {
-      const inputElement = event.target;
-
-      if (!(inputElement instanceof HTMLInputElement)) {
-        return;
-      }
-
-      const value = Number(inputElement.value);
-
-      setSaturationPercentage(value);
-    },
-    [setSaturationPercentage]
-  );
-
   return (
     <form role="form">
-      <fieldset>
-        <legend>Color Space</legend>
-        <label>
-          OKLCH
-          <input
-            onChange={handleColorSpaceChange}
-            name="colorSpace"
-            type="radio"
-            value="oklch"
-            defaultChecked={colorSpace === "oklch"}
-          />
-        </label>
-        <label>
-          HSL
-          <input
-            onChange={handleColorSpaceChange}
-            name="colorSpace"
-            type="radio"
-            value="hsl"
-            defaultChecked={colorSpace === "hsl"}
-          />
-        </label>
-      </fieldset>
       <fieldset>
         <legend>Base Color</legend>
         <label>
@@ -170,37 +129,14 @@ export function ColorPickerForm({
             <output>{hueAngle}°</output>
           </div>
         </label>
-        <label hidden={colorSpace !== "hsl"}>
-          Saturation
-          <div>
-            <input
-              onChange={handleSaturationPercentageChange}
-              type="range"
-              min="0"
-              max="100"
-              step="1"
-              defaultValue={saturationPercentage}
-              name="saturationPercentage"
-              list="percentage-markers"
-            />
-            <datalist id="percentage-markers">
-              <option value="0" label="0%"></option>
-              <option value="25" label="25%"></option>
-              <option value="50" label="50%"></option>
-              <option value="75" label="75%"></option>
-              <option value="100" label="100%"></option>
-            </datalist>
-            <output>{saturationPercentage}%</output>
-          </div>
-        </label>
-        <label hidden={colorSpace !== "oklch"}>
+        <label>
           Chroma (Intensity)
           <div>
             <input
               onChange={handleChromaValueChange}
               type="range"
               min="0"
-              max=".2"
+              max=".3"
               step=".01"
               defaultValue={chromaValue}
               name="chroma"
@@ -271,6 +207,29 @@ export function ColorPickerForm({
             Tetradic
             <small>(90/180/270 degrees)</small>
           </p>
+        </label>
+      </fieldset>
+      <fieldset>
+        <legend>Color Profile</legend>
+        <label>
+          Display-P3 (Wide Gamut)
+          <input
+            onChange={handleColorProfileChange}
+            name="colorProfile"
+            type="radio"
+            value="p3"
+            defaultChecked={colorProfile === "p3"}
+          />
+        </label>
+        <label>
+          sRGB (Flattened)
+          <input
+            onChange={handleColorProfileChange}
+            name="colorProfile"
+            type="radio"
+            value="srgb"
+            defaultChecked={colorProfile === "srgb"}
+          />
         </label>
       </fieldset>
     </form>

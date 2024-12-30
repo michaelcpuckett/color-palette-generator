@@ -18,7 +18,7 @@
     place-content: center;
     gap: 1ch;
 
-    &:before {
+    & div {
       grid-row: 1 / 2;
       grid-column: 1 / 2;
       content: "";
@@ -29,7 +29,7 @@
     }
 
     @media (min-width: 800px) {
-      &:before {
+      & div {
         aspect-ratio: 1 / 1;
       }
     }
@@ -56,49 +56,5 @@
       margin: 0;
       font-size: 0.875em;
     }
-  }
-
-  & [class~="swatch--white"]:before {
-    background-color: var(--swatch--dynamic--white);
-  }
-
-  & [class~="swatch--100"]:before {
-    background-color: var(--swatch--dynamic--100);
-  }
-
-  & [class~="swatch--200"]:before {
-    background-color: var(--swatch--dynamic--200);
-  }
-
-  & [class~="swatch--300"]:before {
-    background-color: var(--swatch--dynamic--300);
-  }
-
-  & [class~="swatch--400"]:before {
-    background-color: var(--swatch--dynamic--400);
-  }
-
-  & [class~="swatch--500"]:before {
-    background-color: var(--swatch--dynamic--500);
-  }
-
-  & [class~="swatch--600"]:before {
-    background-color: var(--swatch--dynamic--600);
-  }
-
-  & [class~="swatch--700"]:before {
-    background-color: var(--swatch--dynamic--700);
-  }
-
-  & [class~="swatch--800"]:before {
-    background-color: var(--swatch--dynamic--800);
-  }
-
-  & [class~="swatch--900"]:before {
-    background-color: var(--swatch--dynamic--900);
-  }
-
-  & [class~="swatch--black"]:before {
-    background-color: var(--swatch--dynamic--black);
   }
 }

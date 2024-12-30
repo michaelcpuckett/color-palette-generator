@@ -1,3 +1,8 @@
+export const srgbColorProfile = "srgb" as const;
+export const p3ColorProfile = "p3" as const;
+
+export type IColorProfile = typeof srgbColorProfile | typeof p3ColorProfile;
+
 export const oklchColorSpace = "oklch" as const;
 export const hslColorSpace = "hsl" as const;
 
