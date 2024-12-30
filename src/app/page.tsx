@@ -50,7 +50,7 @@ function getHslStyles(saturationPercentage: number, localHueAngle: number) {
 function getOklchStyles(chromaValue: number, localHueAngle: number) {
   const maxLightness = 1;
   const minLightness = 0.1;
-  const numSwatches = 9;
+  const numSwatches = 8;
   const lightnessStep = (maxLightness - minLightness) / numSwatches;
   const value100: IColorSet = [
     Math.round(lightnessStep * 9 * 10) / 10,
