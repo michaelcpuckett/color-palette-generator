@@ -98,7 +98,7 @@ export default function Home() {
           .to("srgb")
           .toString({ format: "hex" });
 
-        return `${customProperty}: ${fallbackValue};\n${customProperty}: ${value};\n\n`;
+        return `${customProperty}: ${fallbackValue};\n\n@supports (color: color(display-p3 0 0 1)) {\n  ${customProperty}: ${value};\n}\n\n`;
       })
     )
     .flat()

@@ -21,7 +21,7 @@
 }
 
 body {
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: subpixel-antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   display: grid;
@@ -123,11 +123,12 @@ output {
   overflow: hidden;
 }
 
-:where(input[type="range"]) {
+input[type="range"] {
   width: 100%;
 }
 
 textarea {
+  height: 25em;
   height: 25lh;
   width: 100%;
   font-family: monospace;
