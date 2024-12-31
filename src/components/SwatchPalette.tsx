@@ -14,9 +14,9 @@ export function SwatchPalette({
       <h3>
         {label} - {angleOffset}°
       </h3>
-      <div className={styles.swatches} style={style}>
+      <ul className={styles.swatches} style={style}>
         {lightnessValues.map((lightnessValue) => (
-          <div
+          <li
             key={lightnessValue}
             className={`swatch swatch--${lightnessValue}`}
           >
@@ -25,10 +25,13 @@ export function SwatchPalette({
                 backgroundColor: `var(--swatch--dynamic--${lightnessValue})`,
               }}
             />
-            <small>{lightnessValue}</small>
-          </div>
+            <small>
+              <span className="visually-hidden">Swatch </span>
+              {lightnessValue}
+            </small>
+          </li>
         ))}
-      </div>
+      </ul>
     </Fragment>
   );
 }
