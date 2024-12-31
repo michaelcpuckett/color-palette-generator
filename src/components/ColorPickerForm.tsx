@@ -98,7 +98,7 @@ export function ColorPickerForm({
   return (
     <form role="form">
       <fieldset>
-        <legend>Base Color</legend>
+        <legend>Base Color (LCH)</legend>
         <label>
           Hue (Angle)
           <div>
@@ -222,7 +222,7 @@ export function ColorPickerForm({
           />
         </label>
         <label>
-          sRGB (Flattened)
+          sRGB (Standard)
           <input
             onChange={handleColorProfileChange}
             name="colorProfile"
