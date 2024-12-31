@@ -3,6 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Color Palette Generator",
+  description: "Generate color palettes in the Oklch color space.",
 };
 
 export default function RootLayout({

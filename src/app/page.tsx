@@ -113,9 +113,64 @@ export default function Home() {
     <Fragment>
       <header>
         <h1>Color Palette Generator</h1>
-        <a href="https://github.com/michaelcpuckett/oklab-color-palette-generator">
-          Github
-        </a>
+        <details>
+          <summary>About</summary>
+          <div>
+            <p>
+              This tool creates color palettes using the OKLab color space. The
+              primary palette is defined in cylindrical (LCH) terms by
+              specifying a Hue angle and Chroma value. Lightness values are
+              evenly distributed across 20 swatches.
+            </p>
+            <p>
+              Color harmonies are based on the primary palette. The tool
+              generates complementary, split-complementary, triadic, tetradic,
+              and analogous palettes. Each harmony is defined by an angle offset
+              from the primary palette.
+            </p>
+            <p>
+              The tool generates CSS custom properties for each color in the
+              palette, so you can easily use the colors in web projects. The
+              tool also generates fallback colors in sRGB for browsers that do
+              not support the OKlab color space. The fallback colors are
+              included in the CSS output.
+            </p>
+            <p>
+              See the code on{" "}
+              <a href="https://github.com/michaelcpuckett/oklab-color-palette-generator">
+                Github
+              </a>
+              .
+            </p>
+            <h2>Useful MDN Links</h2>
+            <ul>
+              <li>
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Glossary/Color_space"
+                  target="_blank"
+                >
+                  Color Spaces
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch"
+                  target="_blank"
+                >
+                  oklch() CSS Function
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color"
+                  target="_blank"
+                >
+                  color() CSS Function
+                </a>
+              </li>
+            </ul>
+          </div>
+        </details>
       </header>
       <main className={styles.page}>
         <h2>Configuration</h2>
