@@ -71,8 +71,8 @@ h3 {
   padding: 0;
 }
 
-details + details {
-  margin-top: 1em;
+details {
+  margin: 1em 0;
 }
 
 header {

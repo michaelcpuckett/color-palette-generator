@@ -61,7 +61,7 @@ function getFallbackStyles(style: Record<string, string>) {
 
 export default function Home() {
   const [colorProfile, setColorProfile] = useState<IColorProfile>("p3");
-  const [hueAngle, setHueAngle] = useState(180);
+  const [hueAngle, setHueAngle] = useState(0);
   const [chromaValue, setChromaValue] = useState(0.1);
   const [enabledHarmonyTypes, setEnabledHarmonyTypes] = useState<
     IHarmonyType[]
@@ -119,22 +119,17 @@ export default function Home() {
       </header>
       <main className={styles.page}>
         <div>
-          <details open aria-labelledby="summary--configuration">
-            <summary id="summary--configuration">Configuration</summary>
-            <div>
-              <h2>Configuration</h2>
-              <ColorPickerForm
-                setColorProfile={setColorProfile}
-                colorProfile={colorProfile}
-                setChromaValue={setChromaValue}
-                chromaValue={chromaValue}
-                setHueAngle={setHueAngle}
-                hueAngle={hueAngle}
-                setEnabledHarmonyTypes={setEnabledHarmonyTypes}
-                enabledHarmonyTypes={enabledHarmonyTypes}
-              />
-            </div>
-          </details>
+          <h2>Configuration</h2>
+          <ColorPickerForm
+            setColorProfile={setColorProfile}
+            colorProfile={colorProfile}
+            setChromaValue={setChromaValue}
+            chromaValue={chromaValue}
+            setHueAngle={setHueAngle}
+            hueAngle={hueAngle}
+            setEnabledHarmonyTypes={setEnabledHarmonyTypes}
+            enabledHarmonyTypes={enabledHarmonyTypes}
+          />
           <details aria-labelledby="summary--css-output">
             <summary id="summary--css-output">CSS Output</summary>
             <textarea readOnly value={textareaStyles} />
