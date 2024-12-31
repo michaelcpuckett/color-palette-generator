@@ -83,7 +83,7 @@ export function ColorPickerForm({
         <fieldset>
           <legend>Base Color (LCH)</legend>
           <label>
-            Hue (Angle)
+            Hue
             <div>
               <input
                 onChange={handleHueAngleChange}
@@ -113,7 +113,7 @@ export function ColorPickerForm({
             </div>
           </label>
           <label>
-            Chroma (Intensity)
+            Chroma
             <div>
               <input
                 onChange={handleChromaValueChange}

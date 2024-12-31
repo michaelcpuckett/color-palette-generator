@@ -121,8 +121,8 @@ export default function Home() {
             <p>
               This tool creates color palettes using the OKLab color space. The
               primary palette is defined in cylindrical (LCH) terms by
-              specifying a Hue angle and Chroma value. Lightness values are
-              evenly distributed across 20 swatches.
+              specifying a Hue angle and Chroma (intensity) value. Lightness
+              values are evenly distributed across 20 swatches.
             </p>
             <p>
               Color harmonies are based on the primary palette. The tool
