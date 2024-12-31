@@ -2,24 +2,14 @@
 
 import { ColorPickerForm } from "@/components/ColorPickerForm";
 import { SwatchPalette } from "@/components/SwatchPalette";
-import {
-  harmonies,
-  IColorProfile,
-  IColorSet,
-  IHarmonyType,
-  ISwatchPalette,
-} from "@/types";
+import { harmonies, IColorSet, IHarmonyType, ISwatchPalette } from "@/types";
 import Color from "colorjs.io";
 import { Fragment, useState } from "react";
 import styles from "./page.module.css";
 
-function getOklchStyles(
-  chromaValue: number,
-  localHueAngle: number,
-  colorProfile: IColorProfile
-) {
+function getOklchStyles(chromaValue: number, localHueAngle: number) {
   const maxLightness = 0.975;
-  const minLightness = 0.175;
+  const minLightness = 0.025;
   const numSwatches = 20;
   const lightnessStep = (maxLightness - minLightness) / (numSwatches - 1);
 
@@ -37,7 +27,10 @@ function getOklchStyles(
       const [, name] = label.split("value");
       const value = `oklch(${l} ${c} ${h})`;
 
-      const profileValue = new Color(value).to(colorProfile).toString();
+      const color = new Color(value);
+      const profileValue = (
+        color.inGamut("p3") ? color : color.toGamut("p3")
+      ).toString();
 
       return [`--swatch--dynamic--${name.toLowerCase()}`, profileValue];
     })
@@ -60,12 +53,11 @@ function getFallbackStyles(style: Record<string, string>) {
 }
 
 export default function Home() {
-  const [colorProfile, setColorProfile] = useState<IColorProfile>("p3");
   const [hueAngle, setHueAngle] = useState(0);
-  const [chromaValue, setChromaValue] = useState(0.1);
+  const [chromaValue, setChromaValue] = useState(0.15);
   const [enabledHarmonyTypes, setEnabledHarmonyTypes] = useState<
     IHarmonyType[]
-  >(["complementary", "split", "triadic", "tetradic", "analogous"]);
+  >([]);
 
   const enabledHarmonies = harmonies.filter((harmony) => {
     for (const harmonyType of harmony.types) {
@@ -79,7 +71,7 @@ export default function Home() {
 
   const swatchPalettes: ISwatchPalette[] = enabledHarmonies.map((harmony) => {
     const localHueAngle = hueAngle + harmony.angleOffset;
-    const style = getOklchStyles(chromaValue, localHueAngle, colorProfile);
+    const style = getOklchStyles(chromaValue, localHueAngle);
 
     return {
       ...harmony,
@@ -88,26 +80,36 @@ export default function Home() {
     };
   });
 
-  const textareaStyles = swatchPalettes
-    .map((swatchPalette) =>
-      Object.entries(swatchPalette.style).map(([key, value]) => {
-        const [, , , swatchValue] = key.split("--");
-        const customProperty = `--swatch--${swatchPalette.cssIdentifier}--${swatchValue}`;
+  const textareaStyles =
+    swatchPalettes
+      .map((swatchPalette) =>
+        Object.entries(swatchPalette.style).map(([key, value]) => {
+          const [, , , swatchValue] = key.split("--");
+          const customProperty = `--swatch--${swatchPalette.cssIdentifier}--${swatchValue}`;
 
-        const fallbackValue = new Color(value)
-          .to("srgb")
-          .toString({ format: "hex" });
+          const hexValue = new Color(value)
+            .to("srgb")
+            .toString({ format: "hex" });
+          return `${customProperty}: ${hexValue};\n`;
+        })
+      )
+      .flat()
+      .join("")
+      .trim() +
+    "\n\n@supports (color: oklch(0 1 1)) {\n  " +
+    swatchPalettes
+      .map((swatchPalette) =>
+        Object.entries(swatchPalette.style).map(([key, value]) => {
+          const [, , , swatchValue] = key.split("--");
+          const customProperty = `--swatch--${swatchPalette.cssIdentifier}--${swatchValue}`;
 
-        return `${customProperty}: ${fallbackValue};\n${
-          colorProfile === "p3"
-            ? `\n@supports (color: color(display-p3 0 0 1)) {\n  ${customProperty}: ${value};\n}\n\n`
-            : ""
-        }`;
-      })
-    )
-    .flat()
-    .join("")
-    .trim();
+          return `  ${customProperty}: ${value};\n`;
+        })
+      )
+      .flat()
+      .join("")
+      .trim() +
+    "\n}";
 
   return (
     <Fragment>
@@ -175,8 +177,6 @@ export default function Home() {
       <main className={styles.page}>
         <h2>Configuration</h2>
         <ColorPickerForm
-          setColorProfile={setColorProfile}
-          colorProfile={colorProfile}
           setChromaValue={setChromaValue}
           chromaValue={chromaValue}
           setHueAngle={setHueAngle}

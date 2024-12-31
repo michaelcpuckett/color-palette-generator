@@ -1,11 +1,9 @@
 "use client";
 
-import { IColorProfile, IHarmonyType } from "@/types";
+import { IHarmonyType } from "@/types";
 import { Dispatch, FormEventHandler, SetStateAction, useCallback } from "react";
 
 export function ColorPickerForm({
-  setColorProfile,
-  colorProfile,
   setChromaValue,
   chromaValue,
   setHueAngle,
@@ -13,8 +11,6 @@ export function ColorPickerForm({
   setEnabledHarmonyTypes,
   enabledHarmonyTypes,
 }: {
-  setColorProfile: Dispatch<SetStateAction<IColorProfile>>;
-  colorProfile: IColorProfile;
   setChromaValue: Dispatch<SetStateAction<number>>;
   chromaValue: number;
   setHueAngle: Dispatch<SetStateAction<number>>;
@@ -22,21 +18,6 @@ export function ColorPickerForm({
   setEnabledHarmonyTypes: Dispatch<SetStateAction<IHarmonyType[]>>;
   enabledHarmonyTypes: IHarmonyType[];
 }) {
-  const handleColorProfileChange = useCallback<FormEventHandler>(
-    (event) => {
-      const inputElement = event.target;
-
-      if (!(inputElement instanceof HTMLInputElement)) {
-        return;
-      }
-
-      const value = inputElement.value;
-
-      setColorProfile(value as IColorProfile);
-    },
-    [setColorProfile]
-  );
-
   const handleChromaValueChange = useCallback<FormEventHandler>(
     (event) => {
       const inputElement = event.target;
@@ -151,85 +132,46 @@ export function ColorPickerForm({
           <input
             onInput={handleEnabledHarmonyTypesChange}
             type="checkbox"
-            defaultChecked
             name="harmony"
             value="complementary"
           />
-          <p>
-            Complementary <small>(180 degrees)</small>
-          </p>
+          <p>Complementary</p>
         </label>
         <label>
           <input
             onInput={handleEnabledHarmonyTypesChange}
             type="checkbox"
-            defaultChecked
             name="harmony"
             value="analogous"
           />
-          <p>
-            Analogous <small>(30/60/90/270/300/330 degrees)</small>
-          </p>
+          <p>Analogous</p>
         </label>
         <label>
           <input
             onInput={handleEnabledHarmonyTypesChange}
             type="checkbox"
-            defaultChecked
             name="harmony"
             value="triadic"
           />
-          <p>
-            Triadic <small>(120/240 degrees)</small>
-          </p>
+          <p>Triadic</p>
         </label>
         <label>
           <input
             onInput={handleEnabledHarmonyTypesChange}
             type="checkbox"
-            defaultChecked
             name="harmony"
             value="split"
           />
-          <p>
-            Split Complementary <small>(150/210 degrees)</small>
-          </p>
+          <p>Split Complementary</p>
         </label>
         <label>
           <input
             onInput={handleEnabledHarmonyTypesChange}
             type="checkbox"
-            defaultChecked
             name="harmony"
             value="tetradic"
           />
-          <p>
-            Tetradic
-            <small>(90/180/270 degrees)</small>
-          </p>
-        </label>
-      </fieldset>
-      <fieldset>
-        <legend>Color Profile</legend>
-        <label>
-          Display-P3 (Wide Gamut)
-          <input
-            onChange={handleColorProfileChange}
-            name="colorProfile"
-            type="radio"
-            value="p3"
-            defaultChecked={colorProfile === "p3"}
-          />
-        </label>
-        <label>
-          sRGB (Standard)
-          <input
-            onChange={handleColorProfileChange}
-            name="colorProfile"
-            type="radio"
-            value="srgb"
-            defaultChecked={colorProfile === "srgb"}
-          />
+          <p>Tetradic</p>
         </label>
       </fieldset>
     </form>
