@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "OKLCH/HSL Color Palette Generator",
+  title: "Color Palette Generator",
 };
 
 export default function RootLayout({

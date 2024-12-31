@@ -3,7 +3,7 @@
   flex-direction: column;
   width: 100%;
 
-  @media (min-width: 800px) {
+  @media (min-width: 680px) {
     flex-direction: row;
   }
 
@@ -25,11 +25,12 @@
       width: 100%;
       flex: 0 1 100%;
       display: flex;
-      aspect-ratio: 3 / 1;
-    }
 
-    @media (min-width: 800px) {
-      & div {
+      @media (max-width: 679px) {
+        height: 2em;
+      }
+
+      @media (min-width: 680px) {
         aspect-ratio: 1 / 1;
       }
     }
@@ -42,11 +43,6 @@
       background: Canvas;
       color: CanvasText;
       padding: 4px;
-
-      &[class="warning"] {
-        background: yellow;
-        color: black;
-      }
     }
 
     & span {

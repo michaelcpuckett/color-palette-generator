@@ -118,23 +118,21 @@ export default function Home() {
         </a>
       </header>
       <main className={styles.page}>
-        <div>
-          <h2>Configuration</h2>
-          <ColorPickerForm
-            setColorProfile={setColorProfile}
-            colorProfile={colorProfile}
-            setChromaValue={setChromaValue}
-            chromaValue={chromaValue}
-            setHueAngle={setHueAngle}
-            hueAngle={hueAngle}
-            setEnabledHarmonyTypes={setEnabledHarmonyTypes}
-            enabledHarmonyTypes={enabledHarmonyTypes}
-          />
-          <details aria-labelledby="summary--css-output">
-            <summary id="summary--css-output">CSS Output</summary>
-            <textarea readOnly value={textareaStyles} />
-          </details>
-        </div>
+        <h2>Configuration</h2>
+        <ColorPickerForm
+          setColorProfile={setColorProfile}
+          colorProfile={colorProfile}
+          setChromaValue={setChromaValue}
+          chromaValue={chromaValue}
+          setHueAngle={setHueAngle}
+          hueAngle={hueAngle}
+          setEnabledHarmonyTypes={setEnabledHarmonyTypes}
+          enabledHarmonyTypes={enabledHarmonyTypes}
+        />
+        <details aria-labelledby="summary--css-output">
+          <summary id="summary--css-output">CSS Output</summary>
+          <textarea readOnly value={textareaStyles} />
+        </details>
         <div className="main">
           <h2>Swatch Palettes</h2>
           {swatchPalettes.map((swatchPalette) => (
