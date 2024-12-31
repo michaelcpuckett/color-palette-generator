@@ -184,10 +184,6 @@ export default function Home() {
           setEnabledHarmonyTypes={setEnabledHarmonyTypes}
           enabledHarmonyTypes={enabledHarmonyTypes}
         />
-        <details aria-labelledby="summary--css-output">
-          <summary id="summary--css-output">CSS Output</summary>
-          <textarea readOnly value={textareaStyles} />
-        </details>
         <div className="main">
           <h2>Swatch Palettes</h2>
           {swatchPalettes.map((swatchPalette) => (
@@ -196,6 +192,10 @@ export default function Home() {
               swatchPalette={swatchPalette}
             ></SwatchPalette>
           ))}
+          <details aria-labelledby="summary--css-output">
+            <summary id="summary--css-output">CSS Output</summary>
+            <textarea readOnly value={textareaStyles} />
+          </details>
         </div>
       </main>
     </Fragment>

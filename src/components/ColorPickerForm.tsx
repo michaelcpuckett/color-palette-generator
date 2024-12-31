@@ -78,102 +78,118 @@ export function ColorPickerForm({
 
   return (
     <form role="form">
-      <fieldset>
-        <legend>Base Color (LCH)</legend>
-        <label>
-          Hue (Angle)
-          <div>
+      <details open>
+        <summary>Base Color</summary>
+        <fieldset>
+          <legend>Base Color (LCH)</legend>
+          <label>
+            Hue (Angle)
+            <div>
+              <input
+                onChange={handleHueAngleChange}
+                type="range"
+                min="0"
+                max="360"
+                defaultValue={hueAngle}
+                name="hueAngle"
+                list="degree-markers"
+              />
+              <datalist id="degree-markers">
+                <option value="0" label="0deg"></option>
+                <option value="30" label="30deg"></option>
+                <option value="60" label="60deg"></option>
+                <option value="90" label="90deg"></option>
+                <option value="120" label="120deg"></option>
+                <option value="150" label="120deg"></option>
+                <option value="180" label="180deg"></option>
+                <option value="210" label="180deg"></option>
+                <option value="240" label="240deg"></option>
+                <option value="270" label="270deg"></option>
+                <option value="300" label="300deg"></option>
+                <option value="330" label="330deg"></option>
+                <option value="360" label="360deg"></option>
+              </datalist>
+              <output>{hueAngle}°</output>
+            </div>
+          </label>
+          <label>
+            Chroma (Intensity)
+            <div>
+              <input
+                onChange={handleChromaValueChange}
+                type="range"
+                min="0"
+                max=".3"
+                step=".01"
+                defaultValue={chromaValue}
+                name="chroma"
+                list="decimal-markers"
+              />
+              <datalist id="decimal-markers">
+                <option value="0" label="0"></option>
+                <option value=".05" label=".05"></option>
+                <option value=".1" label=".1"></option>
+                <option value=".15" label=".15"></option>
+                <option value=".2" label=".2"></option>
+                <option value=".25" label=".25"></option>
+                <option value=".3" label=".3"></option>
+              </datalist>
+              <output>{chromaValue}</output>
+            </div>
+          </label>
+        </fieldset>
+      </details>
+      <details>
+        <summary>Color Harmonies</summary>
+        <fieldset>
+          <legend>Harmonies</legend>
+          <label>
             <input
-              onChange={handleHueAngleChange}
-              type="range"
-              min="0"
-              max="360"
-              defaultValue={hueAngle}
-              name="hueAngle"
-              list="degree-markers"
+              onInput={handleEnabledHarmonyTypesChange}
+              type="checkbox"
+              name="harmony"
+              value="complementary"
             />
-            <datalist id="degree-markers">
-              <option value="0" label="0deg"></option>
-              <option value="30" label="30deg"></option>
-              <option value="60" label="60deg"></option>
-              <option value="90" label="90deg"></option>
-              <option value="120" label="120deg"></option>
-              <option value="150" label="120deg"></option>
-              <option value="180" label="180deg"></option>
-              <option value="210" label="180deg"></option>
-              <option value="240" label="240deg"></option>
-              <option value="270" label="270deg"></option>
-              <option value="300" label="300deg"></option>
-              <option value="330" label="330deg"></option>
-              <option value="360" label="360deg"></option>
-            </datalist>
-            <output>{hueAngle}°</output>
-          </div>
-        </label>
-        <label>
-          Chroma (Intensity)
-          <div>
+            <p>Complementary</p>
+          </label>
+          <label>
             <input
-              onChange={handleChromaValueChange}
-              type="range"
-              min="0"
-              max=".3"
-              step=".01"
-              defaultValue={chromaValue}
-              name="chroma"
+              onInput={handleEnabledHarmonyTypesChange}
+              type="checkbox"
+              name="harmony"
+              value="analogous"
             />
-            <output>{chromaValue}</output>
-          </div>
-        </label>
-      </fieldset>
-      <fieldset>
-        <legend>Harmonies</legend>
-        <label>
-          <input
-            onInput={handleEnabledHarmonyTypesChange}
-            type="checkbox"
-            name="harmony"
-            value="complementary"
-          />
-          <p>Complementary</p>
-        </label>
-        <label>
-          <input
-            onInput={handleEnabledHarmonyTypesChange}
-            type="checkbox"
-            name="harmony"
-            value="analogous"
-          />
-          <p>Analogous</p>
-        </label>
-        <label>
-          <input
-            onInput={handleEnabledHarmonyTypesChange}
-            type="checkbox"
-            name="harmony"
-            value="triadic"
-          />
-          <p>Triadic</p>
-        </label>
-        <label>
-          <input
-            onInput={handleEnabledHarmonyTypesChange}
-            type="checkbox"
-            name="harmony"
-            value="split"
-          />
-          <p>Split Complementary</p>
-        </label>
-        <label>
-          <input
-            onInput={handleEnabledHarmonyTypesChange}
-            type="checkbox"
-            name="harmony"
-            value="tetradic"
-          />
-          <p>Tetradic</p>
-        </label>
-      </fieldset>
+            <p>Analogous</p>
+          </label>
+          <label>
+            <input
+              onInput={handleEnabledHarmonyTypesChange}
+              type="checkbox"
+              name="harmony"
+              value="triadic"
+            />
+            <p>Triadic</p>
+          </label>
+          <label>
+            <input
+              onInput={handleEnabledHarmonyTypesChange}
+              type="checkbox"
+              name="harmony"
+              value="split"
+            />
+            <p>Split Complementary</p>
+          </label>
+          <label>
+            <input
+              onInput={handleEnabledHarmonyTypesChange}
+              type="checkbox"
+              name="harmony"
+              value="tetradic"
+            />
+            <p>Tetradic</p>
+          </label>
+        </fieldset>
+      </details>
     </form>
   );
 }

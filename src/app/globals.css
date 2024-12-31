@@ -24,10 +24,6 @@ body {
   overscroll-behavior: none;
 }
 
-h1 {
-  margin: 0;
-}
-
 h2 {
   margin: 1rem 0 0;
 }
@@ -50,7 +46,7 @@ summary {
 }
 
 h3 {
-  margin: 1rem 0;
+  margin: 0;
 }
 
 .visually-hidden {
@@ -65,40 +61,48 @@ h3 {
 }
 
 details {
-  margin: 1em 0 0;
-
   & p {
     margin-top: 0;
   }
 }
 
+form {
+  display: grid;
+  gap: 1rem;
+}
+
 header {
-  padding: 1em;
-  border-bottom: 1px solid;
+  padding: 0 1em;
 }
 
 .main {
   padding: 0 1px;
+  display: grid;
+  gap: 1rem;
 }
 
 fieldset {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0px, 1fr);
   gap: 1rem;
-  flex-wrap: wrap;
   padding: 0.5rem 1rem 1rem;
   margin: 0;
 }
 
 fieldset label:not([hidden]) {
-  display: flex;
+  display: grid;
   gap: 1rem;
   align-items: center;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+  text-align: end;
 }
 
 fieldset label p {
   display: grid;
   font-weight: bold;
   margin: 0;
+  text-align: start;
 
   & small {
     font-weight: normal;
@@ -108,10 +112,12 @@ fieldset label p {
 label div {
   display: flex;
   gap: 1rem;
+  width: 100%;
 }
 
 output {
   width: 7.5ch;
+  text-align: start;
   overflow: hidden;
 }
 
