@@ -2,19 +2,24 @@ import { ISwatchPalette } from "@/types";
 import { Fragment } from "react";
 import styles from "./SwatchPalette.module.css";
 
-const lightnessValues = Array.from({ length: 20 }, (_, i) => i * 50);
-
 export function SwatchPalette({
+  numSwatches,
   swatchPalette: { label, style, angleOffset },
 }: {
+  numSwatches: number;
   swatchPalette: ISwatchPalette;
 }) {
+  const lightnessValues = Array.from(
+    { length: numSwatches },
+    (_, i) => i * Math.floor(1000 / (numSwatches - 1))
+  );
+
   return (
     <Fragment>
       <h3>
         {label} - {angleOffset}°
       </h3>
-      <ul className={styles.swatches} style={style}>
+      <ul role="list" className={styles.swatches} style={style}>
         {lightnessValues.map((lightnessValue) => (
           <li
             key={lightnessValue}

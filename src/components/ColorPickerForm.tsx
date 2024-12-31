@@ -4,6 +4,8 @@ import { IHarmonyType } from "@/types";
 import { Dispatch, FormEventHandler, SetStateAction, useCallback } from "react";
 
 export function ColorPickerForm({
+  setNumSwatches,
+  numSwatches,
   setChromaValue,
   chromaValue,
   setHueAngle,
@@ -11,6 +13,8 @@ export function ColorPickerForm({
   setEnabledHarmonyTypes,
   enabledHarmonyTypes,
 }: {
+  setNumSwatches: Dispatch<SetStateAction<number>>;
+  numSwatches: number;
   setChromaValue: Dispatch<SetStateAction<number>>;
   chromaValue: number;
   setHueAngle: Dispatch<SetStateAction<number>>;
@@ -18,6 +22,21 @@ export function ColorPickerForm({
   setEnabledHarmonyTypes: Dispatch<SetStateAction<IHarmonyType[]>>;
   enabledHarmonyTypes: IHarmonyType[];
 }) {
+  const handleNumSwatchesChange = useCallback<FormEventHandler>(
+    (event) => {
+      const inputElement = event.target;
+
+      if (!(inputElement instanceof HTMLInputElement)) {
+        return;
+      }
+
+      const value = Number(inputElement.value);
+
+      setNumSwatches(value);
+    },
+    [setNumSwatches]
+  );
+
   const handleChromaValueChange = useCallback<FormEventHandler>(
     (event) => {
       const inputElement = event.target;
@@ -135,6 +154,21 @@ export function ColorPickerForm({
                 <option value=".3" label=".3"></option>
               </datalist>
               <output>{chromaValue}</output>
+            </div>
+          </label>
+          <label>
+            Count
+            <div>
+              <input
+                onChange={handleNumSwatchesChange}
+                type="range"
+                min="3"
+                max="41"
+                step="1"
+                defaultValue={numSwatches}
+                name="chroma"
+              />
+              <output>{numSwatches}</output>
             </div>
           </label>
         </fieldset>

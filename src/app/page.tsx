@@ -7,15 +7,19 @@ import Color from "colorjs.io";
 import { Fragment, useState } from "react";
 import styles from "./page.module.css";
 
-function getOklchStyles(chromaValue: number, localHueAngle: number) {
-  const maxLightness = 0.975;
-  const minLightness = 0.025;
-  const numSwatches = 20;
+function getOklchStyles(
+  chromaValue: number,
+  localHueAngle: number,
+  numSwatches: number
+) {
+  const maxLightness = 0.9975;
+  const minLightness = 0.0025;
   const lightnessStep = (maxLightness - minLightness) / (numSwatches - 1);
 
   const palette: Record<string, IColorSet> = Object.fromEntries(
     Array.from({ length: numSwatches }, (_, i) => {
-      const paletteIndex = (numSwatches - (i + 1)) * 50;
+      const paletteIndex =
+        (numSwatches - 1 - i) * Math.floor(1000 / (numSwatches - 1));
       const lightness = minLightness + i * lightnessStep;
 
       return [`value${paletteIndex}`, [lightness, chromaValue, localHueAngle]];
@@ -53,6 +57,7 @@ function getFallbackStyles(style: Record<string, string>) {
 }
 
 export default function Home() {
+  const [numSwatches, setNumSwatches] = useState(11);
   const [hueAngle, setHueAngle] = useState(0);
   const [chromaValue, setChromaValue] = useState(0.15);
   const [enabledHarmonyTypes, setEnabledHarmonyTypes] = useState<
@@ -71,7 +76,7 @@ export default function Home() {
 
   const swatchPalettes: ISwatchPalette[] = enabledHarmonies.map((harmony) => {
     const localHueAngle = hueAngle + harmony.angleOffset;
-    const style = getOklchStyles(chromaValue, localHueAngle);
+    const style = getOklchStyles(chromaValue, localHueAngle, numSwatches);
 
     return {
       ...harmony,
@@ -177,6 +182,8 @@ export default function Home() {
       <main className={styles.page}>
         <h2>Configuration</h2>
         <ColorPickerForm
+          setNumSwatches={setNumSwatches}
+          numSwatches={numSwatches}
           setChromaValue={setChromaValue}
           chromaValue={chromaValue}
           setHueAngle={setHueAngle}
@@ -189,6 +196,7 @@ export default function Home() {
           {swatchPalettes.map((swatchPalette) => (
             <SwatchPalette
               key={swatchPalette.label}
+              numSwatches={numSwatches}
               swatchPalette={swatchPalette}
             ></SwatchPalette>
           ))}

@@ -11,7 +11,6 @@
   }
 
   & [class~="swatch"] {
-    min-height: 48px;
     width: 100%;
     display: grid;
     position: relative;
@@ -19,7 +18,10 @@
     grid-template-rows: auto auto;
     place-items: center;
     place-content: center;
-    gap: 1ch;
+
+    @media (min-width: 700px) {
+      min-height: 48px;
+    }
 
     & div {
       grid-row: 1 / 2;
@@ -42,7 +44,7 @@
       grid-column: 1 / 2;
       content: var(--name);
       text-transform: uppercase;
-      font-size: 0.95rem;
+      font-size: 0.75rem;
       background: Canvas;
       color: CanvasText;
       padding: 5px;
