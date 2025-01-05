@@ -12,7 +12,6 @@
   font-family: monospace;
   line-height: 1.5;
   font-size: calc((18 / 16) * 100%);
-  overscroll-behavior: none;
 }
 
 body {
@@ -21,7 +20,6 @@ body {
   margin: 0;
   display: grid;
   align-content: start;
-  overscroll-behavior: none;
 }
 
 h2 {
